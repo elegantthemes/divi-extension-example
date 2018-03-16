@@ -470,20 +470,20 @@ class DICM_CTA_All_Options extends ET_Builder_Module {
 				'tab_slug'        => $all_types_tab_slug,
 				'toggle_slug'     => 'code',
 			),
-			'option_list' => array(
+			'options_list' => array(
 				'label'           => esc_html__( 'Options List', 'et_builder' ),
 				'type'            => 'options_list',
 				'tab_slug'        => $all_types_tab_slug,
 				'toggle_slug'     => 'form',
 			),
-			'option_list_checkbox' => array(
+			'options_list_checkbox' => array(
 				'label'           => esc_html__( 'Options List: Checkbox', 'et_builder' ),
 				'type'            => 'options_list',
 				'checkbox'        => true,
 				'tab_slug'        => $all_types_tab_slug,
 				'toggle_slug'     => 'form',
 			),
-			'option_list_radio' => array(
+			'options_list_radio' => array(
 				'label'           => esc_html__( 'Options List: Radio', 'et_builder' ),
 				'type'            => 'options_list',
 				'radio'           => true,
@@ -700,6 +700,112 @@ class DICM_CTA_All_Options extends ET_Builder_Module {
 	}
 
 	/**
+	 * Render prop value
+	 * Some prop value needs to be parsed before can be used
+	 *
+	 * @since
+	 *
+	 * @param string $value
+	 * @param string $field_name
+	 * @param string $field_type
+	 * @param string $render_slug
+	 *
+	 * @return string
+	 *
+	 */
+	function render_prop( $value = '', $field_name = '', $field_type = '', $render_slug = '') {
+		$order_class = self::get_module_order_class( $render_slug );
+		$output      = '';
+
+		$option_search  = array( '&#91;', '&#93;' );
+		$option_replace = array( '[', ']' );
+
+		switch ( $field_type ) {
+			case 'options_list':
+				$options = '';
+
+				if ( $value ) {
+					$value = str_replace( $option_search, $option_replace, $value );
+					$value = json_decode( $value );
+
+					foreach ( $value as $option ) {
+						$options .= sprintf(
+							'<option value="%1$s">%2$s</option>',
+							esc_attr( wp_strip_all_tags( $option->value ) ),
+							wp_strip_all_tags( $option->value )
+						);
+					}
+				}
+
+				$output = $options;
+				break;
+			case 'options_list_checkbox':
+				$checkboxes = '';
+				$value          = str_replace( $option_search, $option_replace, $value );
+				$value          = json_decode( $value );
+				$checkbox_name  = sprintf( '%1$s_%2$s', $order_class, $field_name );
+
+				foreach ( $value as $index => $option ) {
+					$checkbox_id  = sprintf( '%1$s_checkbox_%2$s', $checkbox_name, $index );
+					$is_checked   = 1 === $option->checked ? true : false;
+					$option_value = wp_strip_all_tags( $option->value );
+
+					$checkboxes .= sprintf(
+						'<span class="checkbox-wrap">
+							<input type="checkbox" id="%1$s" class="input" value="%2$s"%3$s>
+							<label for="%1$s"><i></i>%2$s</label>
+						</span>',
+						esc_attr( $checkbox_id ),
+						esc_attr( $option_value ),
+						$is_checked ? ' checked="checked"' : ''
+					);
+				}
+
+				$output = $checkboxes;
+				break;
+			case 'options_list_radio':
+				$radios = '';
+
+				if ( $value ) {
+					$value       = str_replace( $option_search, $option_replace, $value );
+					$value       = json_decode( $value );
+					$radio_name  = sprintf( '%1$s_%2$s', $order_class, $field_name );
+
+					foreach ( $value as $index => $option ) {
+						$radio_id  = sprintf( '%1$s_radio_%2$s', $radio_name, $index );
+						$is_checked = 1 === $option->checked ? true : false;
+
+						$radios .= sprintf(
+							'<span class="radio-wrap">
+								<input type="radio" id="%1$s" class="input" value="%3$s" name="%2$s" %4$s>
+								<label for="%1$s"><i></i>%3$s</label>
+							</span>',
+							esc_attr( $radio_id ),
+							esc_attr( $radio_name ),
+							wp_strip_all_tags( $option->value ),
+							checked( $is_checked, true, false )
+						);
+					}
+				}
+
+				$output = $radios;
+				break;
+			case 'select_fonticon':
+				$output = sprintf(
+					'<span style="font-family: ETmodules!important; font-size: 40px;">%1$s</span>',
+					esc_attr( et_pb_process_font_icon( $value ) )
+				);
+				break;
+
+			default:
+				$output = $value;
+				break;
+		}
+
+		return $output;
+	}
+
+	/**
 	 * Render module output
 	 *
 	 * @since ??
@@ -732,20 +838,318 @@ class DICM_CTA_All_Options extends ET_Builder_Module {
 			'custom_icon'      => $button_use_icon,
 		) );
 
+		// Basic fields
+		$basic_fields = sprintf(
+			'<div class="basic-fields fields-group">
+				<h3>%1$s</h3>
+				<h4>%2$s</h4>
+				%3$s
+				<h4>%4$s</h4>
+				%5$s
+				<h4>%6$s</h4>
+				%7$s
+				<h4>%8$s</h4>
+				%9$s
+				<h4>%10$s</h4>
+				%11$s
+				<h4>%12$s</h4>
+				%13$s
+				<h4>%14$s</h4>
+				%15$s
+				<h4>%16$s</h4>
+				%17$s
+				<h4>%18$s</h4>
+				%19$s
+				<h4>%20$s</h4>
+				%21$s
+				<h4>%22$s</h4>
+				%23$s
+			</div>',
+			esc_html__( 'Basic Fields', '' ),
+			esc_html__( 'Text', '' ),
+			esc_html( $this->props['text'] ),
+			esc_html__( 'Textarea', '' ),
+			esc_html( $this->props['textarea'] ), // 5
+			esc_html__( 'Select', '' ),
+			esc_html( $this->props['select'] ),
+			esc_html__( 'Toggle', '' ),
+			esc_html( $this->props['toggle'] ),
+			esc_html__( 'Multiple Buttons', '' ), // 10
+			esc_html( $this->props['multiple_buttons'] ),
+			esc_html__( 'Multiple Checkboxes', '' ),
+			esc_html( $this->props['multiple_checkboxes'] ),
+			esc_html__( 'Input Range', '' ),
+			esc_html( $this->props['input_range'] ), // 15
+			esc_html__( 'Input Date Time', '' ),
+			esc_html( $this->props['input_datetime'] ),
+			esc_html__( 'Input Margin', '' ),
+			esc_html( $this->props['input_margin'] ),
+			esc_html__( 'Checkboxes Category', '' ), // 20
+			esc_html( $this->props['checkboxes_category'] ),
+			esc_html__( 'Select Sidebar', '' ),
+			esc_html( $this->props['select_sidebar'] )
+		);
+
+		// Code fields
+		$code_fields = sprintf(
+			'<div class="code-fields fields-group">
+				<h3>%1$s</h3>
+				<h4>%2$s</h4>
+				%3$s
+			</div>',
+			esc_html__( 'Code Fields', '' ),
+			esc_html__( 'Codemirror', '' ),
+			et_builder_convert_line_breaks( et_builder_replace_code_content_entities( $this->props['codemirror'] ) )
+		);
+
+		// Form Fields
+		$options_list = sprintf(
+			'<p>%1$s</p>
+			<pre>%2$s</pre>
+			<p>%3$s</p>
+			<select name="option-name">%4$s</select>',
+			esc_html__( 'Prop value: ', '' ),
+			$this->props['options_list'],
+			esc_html__( 'Rendered prop value: ', '' ),
+			$this->render_prop( $this->props['options_list'], 'options_list', 'options_list', $render_slug )
+		);
+
+		$options_list_checkbox = sprintf(
+			'<p>%1$s</p>
+			<pre>%2$s</pre>
+			<p>%3$s</p>
+			<p>%4$s</p>',
+			esc_html__( 'Prop value: ', '' ),
+			$this->props['options_list_checkbox'],
+			esc_html__( 'Rendered prop value: ', '' ),
+			$this->render_prop( $this->props['options_list_checkbox'], 'options_list_checkbox', 'options_list_checkbox', $render_slug )
+		);
+
+		$options_list_radio = sprintf(
+			'<p>%1$s</p>
+			<pre>%2$s</pre>
+			<p>%3$s</p>
+			<p>%4$s</p>',
+			esc_html__( 'Prop value: ', '' ),
+			$this->props['options_list_radio'],
+			esc_html__( 'Rendered prop value: ', '' ),
+			$this->render_prop( $this->props['options_list_radio'], 'options_list_radio', 'options_list_radio', $render_slug )
+		);
+
+		$form_fields = sprintf(
+			'<div class="form-fields fields-group">
+				<h3>%1$s</h3>
+				<h4>%2$s</h4>
+				%3$s
+				<h4>%4$s</h4>
+				%5$s
+				<h4>%6$s</h4>
+				%7$s
+			</div>',
+			esc_html__( 'Form Fields', '' ),
+			esc_html__( 'Option List', '' ),
+			et_sanitized_previously( $options_list ),
+			esc_html__( 'Option List Checkbox', '' ),
+			et_sanitized_previously( $options_list_checkbox ), // 5
+			esc_html__( 'Option List Radio', '' ),
+			et_sanitized_previously( $options_list_radio )
+		);
+
+		// Typography Fields
+		$font_icon = sprintf(
+			'<p>%1$s</p>
+			<pre>%2$s</pre>
+			<p>%3$s</p>
+			<p>%4$s</p>',
+			esc_html__( 'Prop value: ', '' ),
+			$this->props['select_fonticon'],
+			esc_html__( 'Rendered prop value: ', '' ),
+			$this->render_prop( $this->props['select_fonticon'], 'select_fonticon', 'select_fonticon', $render_slug )
+		);
+
+		$typography_fields = sprintf(
+			'<div class="typography-fields fields-group">
+				<h3>%1$s</h3>
+				<h4>%2$s</h4>
+				%3$s
+				<h4>%4$s</h4>
+				%5$s
+				<h4>%6$s</h4>
+				%7$s
+			</div>',
+			esc_html__( 'Typography Fields', '' ),
+			esc_html__( 'Select Font Icon', '' ),
+			et_sanitized_previously( $font_icon ),
+			esc_html__( 'Select Text Align', '' ),
+			esc_html( $this->props['text_align'] ), // 5
+			esc_html__( 'Select Font', '' ),
+			esc_html( $this->props['select_font'] )
+		);
+
+		// Process text-align value into style
+		if ( '' !== $this->props['text_align'] ) {
+			ET_Builder_Element::set_style( $render_slug, array(
+				'selector'    => '%%order_class%% .typography-fields',
+				'declaration' => sprintf(
+					'text-align: %1$s;',
+					esc_html( $this->props['text_align'] )
+				),
+			) );
+		}
+
+		// Process font option into style
+		if ( '' !== $this->props['select_font'] ) {
+			ET_Builder_Element::set_style( $render_slug, array(
+				'selector'    => '%%order_class%% .typography-fields',
+				'declaration' => et_builder_set_element_font( $this->props['select_font'] ),
+			) );
+		}
+
+		// Color Fields
+		$color_fields = sprintf(
+			'<div class="color-fields fields-group">
+				<h3>%1$s</h3>
+				<h4>%2$s</h4>
+				%3$s
+				<div class="colorpicker-preview color"></div>
+				<h4>%4$s</h4>
+				%5$s
+				<div class="colorpicker-preview color-alpha"></div>
+			</div>',
+			esc_html__( 'Color Fields', '' ),
+			esc_html__( 'Color', '' ),
+			esc_html( $this->props['color'] ),
+			esc_html__( 'Color Alpha', '' ),
+			esc_html( $this->props['color_alpha'] ) // 5
+		);
+
+		// Process saved color into style
+		if ( '' !== $this->props['color'] ) {
+			ET_Builder_Element::set_style( $render_slug, array(
+				'selector'    => '%%order_class%% .colorpicker-preview.color',
+				'declaration' => sprintf(
+					'background-color: %1$s;',
+					esc_html( $this->props['color'] )
+				),
+			) );
+		}
+
+		if ( '' !== $this->props['color_alpha'] ) {
+			ET_Builder_Element::set_style( $render_slug, array(
+				'selector'    => '%%order_class%% .colorpicker-preview.color-alpha',
+				'declaration' => sprintf(
+					'background-color: %1$s;',
+					esc_html( $this->props['color_alpha'] )
+				),
+			) );
+		}
+
+		// Upload Fields
+		$upload_fields = sprintf(
+			'<div class="upload-fields fields-group">
+				<h3>%1$s</h3>
+				<h4>%2$s</h4>
+				%3$s
+				<h4>%4$s</h4>
+				%5$s
+				<h4>%6$s</h4>
+				%7$s
+				<h4>%8$s</h4>
+				%9$s
+				<h4>%10$s</h4>
+				%11$s
+			</div>',
+			esc_html__( 'Upload Fields', '' ),
+			esc_html__( 'Upload', '' ),
+			esc_html( $this->props['upload'] ),
+			esc_html__( 'Gallery', '' ),
+			esc_html( $this->props['upload_gallery'] ), // 5
+			esc_html__( 'Gallery IDs', '' ),
+			esc_html( $this->props['upload_gallery_ids'] ),
+			esc_html__( 'Gallery Orderby', '' ),
+			esc_html( $this->props['upload_gallery_orderby'] ),
+			esc_html__( 'Gallery Captions', '' ),
+			esc_html( $this->props['upload_gallery_captions'] )
+		);
+
+		// Advanced fields
+		$advanced_fields = sprintf(
+			'<div class="advanced-fields fields-group">
+				<h3>%1$s</h3>
+				<h4>%2$s</h4>
+				%3$s
+				<h4>%4$s</h4>
+				%5$s
+				<h4>%6$s</h4>
+				%7$s
+				<h4>%8$s</h4>
+				%9$s
+				<h4>%10$s</h4>
+				%11$s
+				<h4>%12$s</h4>
+				%13$s
+				<h4>%14$s</h4>
+				%15$s
+				<h4>%16$s</h4>
+				%17$s
+				<h4>%18$s</h4>
+				%19$s
+				<h4>%20$s</h4>
+				%21$s
+			</div>',
+			esc_html__( 'Advanced Fields', '' ),
+			esc_html__( 'Address', '' ),
+			esc_html( $this->props['address'] ),
+			esc_html__( 'Zoom Level', '' ),
+			esc_html( $this->props['zoom_level'] ),
+			esc_html__( 'Address Lat', '' ),
+			esc_html( $this->props['address_lat'] ),
+			esc_html__( 'Address Lan', '' ),
+			esc_html( $this->props['address_lng'] ),
+			esc_html__( 'Map Center', '' ),
+			esc_html( $this->props['map_center'] ),
+			esc_html__( 'Tab 1 Text', '' ),
+			esc_html( $this->props['tab_1_text'] ),
+			esc_html__( 'Tab 2 Text', '' ),
+			esc_html( $this->props['tab_2_text'] ),
+			esc_html__( 'Presets Shadow', '' ),
+			esc_html( $this->props['presets_shadow'] ),
+			esc_html__( 'Preset Affected 1', '' ),
+			esc_html( $this->props['preset_affected_1'] ),
+			esc_html__( 'Preset Affected 2', '' ),
+			esc_html( $this->props['preset_affected_2'] )
+		);
+
 		// Render module content
 		$output = sprintf(
 			'<h2 class="dicm-title">%1$s</h2>
 			<div class="dicm-content">%2$s</div>
-			%3$s',
+			%3$s
+			%4$s
+			%5$s
+			%6$s
+			%7$s
+			%8$s
+			%9$s
+			%10$s',
 			esc_html( $title ),
 			et_sanitized_previously( $this->content ),
-			et_sanitized_previously( $button )
+			et_sanitized_previously( $button ),
+			$basic_fields,
+			$code_fields,
+			$form_fields,
+			$typography_fields,
+			$color_fields,
+			$upload_fields,
+			$advanced_fields
 		);
 
 		// Render wrapper
+		return $output;
+
 		// 3rd party module with no full VB support has to wrap its render output with $this->_render_module_wrapper().
 		// This method will automatically add module attributes and proper structure for parallax image/video background
-		return $this->_render_module_wrapper( $output, $render_slug );
+		// return $this->_render_module_wrapper( $output, $render_slug );
 	}
 }
 
