@@ -1,0 +1,8 @@
+<svg viewBox="0 0 28 28" preserveAspectRatio="xMidYMid meet" shape-rendering="geometricPrecision">
+  <g>
+    <path d="M22.9 7.5c-0.1-0.3-0.5-0.6-0.8-0.6H5.9c-0.4 0-0.7 0.2-0.8 0.6C5.1 7.6 5 7.7 5 7.9v12.2c0 0.1 0 0.2 0.1 0.4 0.1 0.3 0.5 0.5 0.8 0.6h16.2c0.4 0 0.7-0.2 0.8-0.6 0-0.1 0.1-0.2 0.1-0.4V7.9C23 7.7 23 7.6 22.9 7.5zM21 18.9H7v-10h14V18.9z" fillRule="evenodd"/>
+    <circle cx="10.5" cy="12.4" r="1.5"/>
+    <polygon points="15 16.9 13 13.9 11 16.9 "/>
+    <polygon points="17 10.9 15 16.9 19 16.9 "/>
+  </g>
+</svg>

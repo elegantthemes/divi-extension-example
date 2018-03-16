@@ -1,11 +1,17 @@
 <?php
 
-class DICM_CTA_Has_VB_Support extends ET_Builder_Module {
+class DICM_CTA_Child extends ET_Builder_Module {
 	// Module slug (also used as shortcode tag)
-	public $slug       = 'dicm_cta_vb';
+	public $slug                     = 'dicm_cta_child';
 
-	// Visual Builder support (off|partial|on)
-	public $vb_support = 'on';
+	// Module item has to use `child` as its type property
+	public $type                     = 'child';
+
+	// Module item's attribute that will be used for module item label on modal
+	public $child_title_var          = 'title';
+
+	// If the attribute defined on $this->child_title_var is empty, this attribute will be used instead
+	public $child_title_fallback_var = 'subtitle';
 
 	/**
 	 * Module properties initialization
@@ -16,12 +22,14 @@ class DICM_CTA_Has_VB_Support extends ET_Builder_Module {
 	 */
 	function init() {
 		// Module name
-		$this->name             = esc_html__( 'Custom CTA VB', 'dicm-divi-custom-modules' );
+		$this->name             = esc_html__( 'Custom CTA Child', 'dicm-divi-custom-modules' );
 
-		// Module Icon
-		// Load customized svg icon and use it on builder as module icon. If you don't have svg icon, you can use
-		// $this->icon for using etbuilder font-icon. (See CustomCta / DICM_CTA class)
-		$this->icon_path        =  plugin_dir_path( __FILE__ ) . 'icon.svg';
+		// Default label for module item. Basically if $this->child_title_var and $this->child_title_fallback_var
+		// attributes are empty, this default text will be used instead as item label
+		$this->advanced_setting_title_text = esc_html__( 'CTA Item', 'et_builder' );
+
+		// Module item's modal title
+		$this->settings_text = esc_html__( 'CTA Item Settings', 'et_builder' );
 
 		// Toggle settings
 		$this->options_toggles  = array(
@@ -58,6 +66,13 @@ class DICM_CTA_Has_VB_Support extends ET_Builder_Module {
 				'type'            => 'text',
 				'option_category' => 'basic_option',
 				'description'     => esc_html__( 'Text entered here will appear as title.', 'dicm-divi-custom-modules' ),
+				'toggle_slug'     => 'main_content',
+			),
+			'subtitle' => array(
+				'label'           => esc_html__( 'Sub Title', 'dicm-divi-custom-modules' ),
+				'type'            => 'text',
+				'option_category' => 'basic_option',
+				'description'     => esc_html__( 'Text entered here will appear as subtitle.', 'dicm-divi-custom-modules' ),
 				'toggle_slug'     => 'main_content',
 			),
 			'content' => array(
@@ -111,11 +126,12 @@ class DICM_CTA_Has_VB_Support extends ET_Builder_Module {
 	function render( $attrs, $content = null, $render_slug ) {
 		// Module specific props added on $this->get_fields()
 		$title                 = $this->props['title'];
+		$subtitle              = $this->props['subtitle'];
 		$button_text           = $this->props['button_text'];
 		$button_url            = $this->props['button_url'];
 		$button_url_new_window = $this->props['button_url_new_window'];
 
-		// These design related props are added via $this->advanced_options['button']['button']
+		// Design related props are added via $this->advanced_options['button']['button']
 		$button_custom         = $this->props['custom_button'];
 		$button_rel            = $this->props['button_rel'];
 		$button_use_icon       = $this->props['button_use_icon'];
@@ -130,17 +146,23 @@ class DICM_CTA_Has_VB_Support extends ET_Builder_Module {
 			'custom_icon'      => $button_use_icon,
 		) );
 
-		// 3rd party module with full VB support doesn't need to manually wrap its module. Divi builder
-		// has automatically wrapped it
-		return sprintf(
+		// Render module content
+		$output = sprintf(
 			'<h2 class="dicm-title">%1$s</h2>
-			<div class="dicm-content">%2$s</div>
-			%3$s',
+			<h3 class="dicm-subtitle">%2$s</h3>
+			<div class="dicm-content">%3$s</div>
+			%4$s',
 			esc_html( $title ),
+			esc_html( $subtitle ),
 			et_sanitized_previously( $this->content ),
 			et_sanitized_previously( $button )
 		);
+
+		// Render wrapper
+		// 3rd party module with no full VB support has to wrap its render output with $this->_render_module_wrapper().
+		// This method will automatically add module attributes and proper structure for parallax image/video background
+		return $this->_render_module_wrapper( $output, $render_slug );
 	}
 }
 
-new DICM_CTA_Has_VB_Support;
+new DICM_CTA_Child;

@@ -15,6 +15,11 @@ class DICM_CTA extends ET_Builder_Module {
 		// Module name
 		$this->name             = esc_html__( 'Custom CTA', 'dicm-divi-custom-modules' );
 
+		// Module Icon
+		// This character will be rendered using etbuilder font-icon. For fully customized icon, create svg icon and
+		// define its path on $this->icon_path property (see CustomCTAFull / DICM_CTA_Has_VB_Support)
+		$this->icon             = 'j';
+
 		// Toggle settings
 		$this->options_toggles  = array(
 			'general'  => array(

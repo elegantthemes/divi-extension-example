@@ -1,11 +1,8 @@
 <?php
 
-class DICM_CTA_Has_VB_Support extends ET_Builder_Module {
+class DICM_CTA_All_Options extends ET_Builder_Module {
 	// Module slug (also used as shortcode tag)
-	public $slug       = 'dicm_cta_vb';
-
-	// Visual Builder support (off|partial|on)
-	public $vb_support = 'on';
+	public $slug       = 'dicm_cta_all_options';
 
 	/**
 	 * Module properties initialization
@@ -16,12 +13,12 @@ class DICM_CTA_Has_VB_Support extends ET_Builder_Module {
 	 */
 	function init() {
 		// Module name
-		$this->name             = esc_html__( 'Custom CTA VB', 'dicm-divi-custom-modules' );
+		$this->name             = esc_html__( 'Custom CTA All Options', 'dicm-divi-custom-modules' );
 
 		// Module Icon
-		// Load customized svg icon and use it on builder as module icon. If you don't have svg icon, you can use
-		// $this->icon for using etbuilder font-icon. (See CustomCta / DICM_CTA class)
+		// $this->icon             = 'x';
 		$this->icon_path        =  plugin_dir_path( __FILE__ ) . 'icon.svg';
+
 
 		// Toggle settings
 		$this->options_toggles  = array(
@@ -115,7 +112,7 @@ class DICM_CTA_Has_VB_Support extends ET_Builder_Module {
 		$button_url            = $this->props['button_url'];
 		$button_url_new_window = $this->props['button_url_new_window'];
 
-		// These design related props are added via $this->advanced_options['button']['button']
+		// Design related props are added via $this->advanced_options['button']['button']
 		$button_custom         = $this->props['custom_button'];
 		$button_rel            = $this->props['button_rel'];
 		$button_use_icon       = $this->props['button_use_icon'];
@@ -130,9 +127,8 @@ class DICM_CTA_Has_VB_Support extends ET_Builder_Module {
 			'custom_icon'      => $button_use_icon,
 		) );
 
-		// 3rd party module with full VB support doesn't need to manually wrap its module. Divi builder
-		// has automatically wrapped it
-		return sprintf(
+		// Render module content
+		$output = sprintf(
 			'<h2 class="dicm-title">%1$s</h2>
 			<div class="dicm-content">%2$s</div>
 			%3$s',
@@ -140,7 +136,12 @@ class DICM_CTA_Has_VB_Support extends ET_Builder_Module {
 			et_sanitized_previously( $this->content ),
 			et_sanitized_previously( $button )
 		);
+
+		// Render wrapper
+		// 3rd party module with no full VB support has to wrap its render output with $this->_render_module_wrapper().
+		// This method will automatically add module attributes and proper structure for parallax image/video background
+		return $this->_render_module_wrapper( $output, $render_slug );
 	}
 }
 
-new DICM_CTA_Has_VB_Support;
+new DICM_CTA_All_Options;
