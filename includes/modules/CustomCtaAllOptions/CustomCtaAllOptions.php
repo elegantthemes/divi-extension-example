@@ -705,10 +705,10 @@ class DICM_CTA_All_Options extends ET_Builder_Module {
 	 *
 	 * @since
 	 *
-	 * @param string $value
-	 * @param string $field_name
-	 * @param string $field_type
-	 * @param string $render_slug
+	 * @param string|array $value
+	 * @param string       $field_name
+	 * @param string       $field_type
+	 * @param string       $render_slug
 	 *
 	 * @return string
 	 *
@@ -716,6 +716,10 @@ class DICM_CTA_All_Options extends ET_Builder_Module {
 	function render_prop( $value = '', $field_name = '', $field_type = '', $render_slug = '') {
 		$order_class = self::get_module_order_class( $render_slug );
 		$output      = '';
+
+		if ( '' === $value ) {
+			return $output;
+		}
 
 		$option_search  = array( '&#91;', '&#93;' );
 		$option_replace = array( '[', ']' );
@@ -794,6 +798,43 @@ class DICM_CTA_All_Options extends ET_Builder_Module {
 				$output = sprintf(
 					'<span style="font-family: ETmodules!important; font-size: 40px;">%1$s</span>',
 					esc_attr( et_pb_process_font_icon( $value ) )
+				);
+				break;
+			case 'upload_image':
+				$output = sprintf(
+					'<img src="%1$s" />',
+					esc_attr( $value )
+				);
+				break;
+			case 'upload_gallery':
+				$gallery_shortcode = sprintf(
+					'[gallery ids="%1$s"]',
+					esc_attr( $value )
+				);
+
+				$output = do_shortcode( $gallery_shortcode );
+				break;
+			case 'map':
+				if ( et_pb_enqueue_google_maps_script() ) {
+					wp_enqueue_script( 'google-maps-api' );
+				}
+
+				$map_default = array(
+					'zoom_level'  => '',
+					'address_lat' => '',
+					'address_lng' => '',
+					'map_center'  => '',
+				);
+
+				$map_args = wp_parse_args( $value, $map_default );
+
+				$output = sprintf(
+					'<div class="dicm_map et_pb_map_container">
+						<div class="et_pb_map" data-center-lat="%1$s" data-center-lng="%2$s" data-zoom="%3$d" data-mouse-wheel="on" data-mobile-dragging="on"></div>
+					</div>',
+					esc_attr( $map_args['address_lat'] ),
+					esc_attr( $map_args['address_lng'] ),
+					esc_attr( $map_args['zoom_level'] )
 				);
 				break;
 
@@ -1045,6 +1086,17 @@ class DICM_CTA_All_Options extends ET_Builder_Module {
 		}
 
 		// Upload Fields
+		$upload = sprintf(
+			'<p>%1$s</p>
+			<pre>%2$s</pre>
+			<p>%3$s</p>
+			<p>%4$s</p>',
+			esc_html__( 'Prop value: ', '' ),
+			$this->props['upload'],
+			esc_html__( 'Rendered prop value: ', '' ),
+			$this->render_prop( $this->props['upload'], 'upload', 'upload_image', $render_slug )
+		);
+
 		$upload_fields = sprintf(
 			'<div class="upload-fields fields-group">
 				<h3>%1$s</h3>
@@ -1058,21 +1110,33 @@ class DICM_CTA_All_Options extends ET_Builder_Module {
 				%9$s
 				<h4>%10$s</h4>
 				%11$s
+				%12$s
+				%13$s
 			</div>',
 			esc_html__( 'Upload Fields', '' ),
 			esc_html__( 'Upload', '' ),
-			esc_html( $this->props['upload'] ),
+			et_sanitized_previously( $upload ),
 			esc_html__( 'Gallery', '' ),
 			esc_html( $this->props['upload_gallery'] ), // 5
 			esc_html__( 'Gallery IDs', '' ),
 			esc_html( $this->props['upload_gallery_ids'] ),
 			esc_html__( 'Gallery Orderby', '' ),
 			esc_html( $this->props['upload_gallery_orderby'] ),
-			esc_html__( 'Gallery Captions', '' ),
-			esc_html( $this->props['upload_gallery_captions'] )
+			esc_html__( 'Gallery Captions', '' ), // 10
+			esc_html( $this->props['upload_gallery_captions'] ),
+			esc_html__( 'Rendered gallery', ''),
+			$this->render_prop( $this->props['upload_gallery_ids'], 'upload_gallery', 'upload_gallery', $render_slug )
 		);
 
 		// Advanced fields
+		$map = $this->render_prop( array(
+			'address'     => $this->props['address'],
+			'zoom_level'  => $this->props['zoom_level'],
+			'address_lat' => $this->props['address_lat'],
+			'address_lng' => $this->props['address_lng'],
+			'map_center'  => $this->props['map_center'],
+		), 'map', 'map', $render_slug );
+
 		$advanced_fields = sprintf(
 			'<div class="advanced-fields fields-group">
 				<h3>%1$s</h3>
@@ -1086,6 +1150,7 @@ class DICM_CTA_All_Options extends ET_Builder_Module {
 				%9$s
 				<h4>%10$s</h4>
 				%11$s
+				%22$s
 				<h4>%12$s</h4>
 				%13$s
 				<h4>%14$s</h4>
@@ -1101,23 +1166,24 @@ class DICM_CTA_All_Options extends ET_Builder_Module {
 			esc_html__( 'Address', '' ),
 			esc_html( $this->props['address'] ),
 			esc_html__( 'Zoom Level', '' ),
-			esc_html( $this->props['zoom_level'] ),
+			esc_html( $this->props['zoom_level'] ), // #5
 			esc_html__( 'Address Lat', '' ),
 			esc_html( $this->props['address_lat'] ),
 			esc_html__( 'Address Lan', '' ),
 			esc_html( $this->props['address_lng'] ),
-			esc_html__( 'Map Center', '' ),
+			esc_html__( 'Map Center', '' ), // #10
 			esc_html( $this->props['map_center'] ),
 			esc_html__( 'Tab 1 Text', '' ),
 			esc_html( $this->props['tab_1_text'] ),
 			esc_html__( 'Tab 2 Text', '' ),
-			esc_html( $this->props['tab_2_text'] ),
+			esc_html( $this->props['tab_2_text'] ), // #15
 			esc_html__( 'Presets Shadow', '' ),
 			esc_html( $this->props['presets_shadow'] ),
 			esc_html__( 'Preset Affected 1', '' ),
 			esc_html( $this->props['preset_affected_1'] ),
-			esc_html__( 'Preset Affected 2', '' ),
-			esc_html( $this->props['preset_affected_2'] )
+			esc_html__( 'Preset Affected 2', '' ), // #20
+			esc_html( $this->props['preset_affected_2'] ),
+			et_sanitized_previously( $map )
 		);
 
 		// Render module content
