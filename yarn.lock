@@ -1167,9 +1167,9 @@ babel-plugin-transform-react-remove-prop-types@0.4.12:
   version "0.4.12"
   resolved "https://registry.yarnpkg.com/babel-plugin-transform-react-remove-prop-types/-/babel-plugin-transform-react-remove-prop-types-0.4.12.tgz#a382c27c42d6580748c80caf8c3d5091edbb60b8"
 
-babel-preset-divi-extension@^1.0.0-beta.1:
-  version "1.0.0-beta.1"
-  resolved "https://registry.yarnpkg.com/babel-preset-divi-extension/-/babel-preset-divi-extension-1.0.0-beta.1.tgz#81150ad5ab30db5ec72e5ce90fd96a28311c595f"
+babel-preset-divi-extension@^1.0.0-beta.5:
+  version "1.0.0-beta.5"
+  resolved "https://registry.yarnpkg.com/babel-preset-divi-extension/-/babel-preset-divi-extension-1.0.0-beta.5.tgz#e8967ad89bfb75af27321c9cc7ed917242f854f0"
   dependencies:
     "@babel/core" "7.0.0-beta.41"
     "@babel/plugin-proposal-class-properties" "7.0.0-beta.41"
@@ -2402,9 +2402,9 @@ dir-glob@^2.0.0:
     arrify "^1.0.1"
     path-type "^3.0.0"
 
-divi-dev-utils@^1.0.0-beta.1:
-  version "1.0.0-beta.1"
-  resolved "https://registry.yarnpkg.com/divi-dev-utils/-/divi-dev-utils-1.0.0-beta.1.tgz#7717bf237538eaf1210edbbcb47cd1036d81a6a0"
+divi-dev-utils@^1.0.0-beta.5:
+  version "1.0.0-beta.5"
+  resolved "https://registry.yarnpkg.com/divi-dev-utils/-/divi-dev-utils-1.0.0-beta.5.tgz#69ad33b3eaa133a75744940823282bdde828a0f5"
   dependencies:
     "@babel/code-frame" "7.0.0-beta.41"
     address "1.0.3"
@@ -2412,7 +2412,7 @@ divi-dev-utils@^1.0.0-beta.1:
     chalk "2.3.0"
     cross-spawn "5.1.0"
     detect-port-alt "1.1.5"
-    divi-error-overlay "^1.0.0-beta.1"
+    divi-error-overlay "^1.0.0-beta.5"
     escape-string-regexp "1.0.5"
     filesize "3.5.11"
     find-pkg "1.0.0"
@@ -2429,13 +2429,13 @@ divi-dev-utils@^1.0.0-beta.1:
     strip-ansi "4.0.0"
     text-table "0.2.0"
 
-divi-error-overlay@^1.0.0-beta.1:
-  version "1.0.0-beta.1"
-  resolved "https://registry.yarnpkg.com/divi-error-overlay/-/divi-error-overlay-1.0.0-beta.1.tgz#988c649ace02638188b92bc164d7ac154918655f"
+divi-error-overlay@^1.0.0-beta.5:
+  version "1.0.0-beta.5"
+  resolved "https://registry.yarnpkg.com/divi-error-overlay/-/divi-error-overlay-1.0.0-beta.5.tgz#1b3a20b5f7becdfb71ed8b6e048ecf0b15bf246c"
 
-divi-scripts@1.0.0-beta.1:
-  version "1.0.0-beta.1"
-  resolved "https://registry.yarnpkg.com/divi-scripts/-/divi-scripts-1.0.0-beta.1.tgz#269f35ff2b697ef8373f4c5c93581d6d725540c4"
+divi-scripts@1.0.0-beta.5:
+  version "1.0.0-beta.5"
+  resolved "https://registry.yarnpkg.com/divi-scripts/-/divi-scripts-1.0.0-beta.5.tgz#33850d8e09c076a6d6bb8cc574f58da6e195bcc2"
   dependencies:
     "@babel/core" "7.0.0-beta.41"
     "@babel/runtime" "7.0.0-beta.41"
@@ -2445,15 +2445,15 @@ divi-scripts@1.0.0-beta.1:
     babel-jest "22.1.0"
     babel-loader "8.0.0-beta.0"
     babel-plugin-named-asset-import "^1.0.0-alpha.0"
-    babel-preset-divi-extension "^1.0.0-beta.1"
+    babel-preset-divi-extension "^1.0.0-beta.5"
     case-sensitive-paths-webpack-plugin "2.1.1"
     chalk "2.3.0"
     css-loader "0.28.9"
-    divi-dev-utils "^1.0.0-beta.1"
+    divi-dev-utils "^1.0.0-beta.5"
     dotenv "5.0.0"
     dotenv-expand "4.2.0"
     eslint "4.15.0"
-    eslint-config-divi-extension "^1.0.0-beta.1"
+    eslint-config-divi-extension "^1.0.0-beta.5"
     eslint-loader "1.9.0"
     eslint-plugin-flowtype "2.41.0"
     eslint-plugin-import "2.8.0"
@@ -2781,9 +2781,9 @@ escope@^3.6.0:
     esrecurse "^4.1.0"
     estraverse "^4.1.1"
 
-eslint-config-divi-extension@^1.0.0-beta.1:
-  version "1.0.0-beta.1"
-  resolved "https://registry.yarnpkg.com/eslint-config-divi-extension/-/eslint-config-divi-extension-1.0.0-beta.1.tgz#a5327e32ed73e435f28f7b0b00e7362aba74df11"
+eslint-config-divi-extension@^1.0.0-beta.5:
+  version "1.0.0-beta.5"
+  resolved "https://registry.yarnpkg.com/eslint-config-divi-extension/-/eslint-config-divi-extension-1.0.0-beta.5.tgz#e89101665ee39175437ace606d0136d5f923e793"
   dependencies:
     confusing-browser-globals "^2.0.0-next"
 
@@ -6407,7 +6407,7 @@ rc@^1.0.1, rc@^1.1.6, rc@^1.1.7:
     minimist "^1.2.0"
     strip-json-comments "~2.0.1"
 
-react-dom@16.2.0:
+react-dom@^16.2.0:
   version "16.2.0"
   resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-16.2.0.tgz#69003178601c0ca19b709b33a83369fe6124c044"
   dependencies:
@@ -6416,7 +6416,7 @@ react-dom@16.2.0:
     object-assign "^4.1.1"
     prop-types "^15.6.0"
 
-react@16.2.0:
+react@^16.2.0:
   version "16.2.0"
   resolved "https://registry.yarnpkg.com/react/-/react-16.2.0.tgz#a31bd2dab89bff65d42134fa187f24d054c273ba"
   dependencies:
