@@ -11,8 +11,6 @@ class DICM_CTA_Has_Partial_VB_Support extends ET_Builder_Module {
 	 * Module properties initialization
 	 *
 	 * @since ??
-	 *
-	 * @todo Remove $this->advanced_options['background'] once https://github.com/elegantthemes/Divi/issues/6913 has been addressed
 	 */
 	function init() {
 		// Module name
@@ -29,16 +27,6 @@ class DICM_CTA_Has_Partial_VB_Support extends ET_Builder_Module {
 				'toggles' => array(
 					'main_content' => esc_html__( 'Text', 'dicm-divi-custom-modules' ),
 					'button'       => esc_html__( 'Button', 'dicm-divi-custom-modules' ),
-				),
-			),
-		);
-
-		// Advanced options settings
-		$this->advanced_options = array(
-			'background' => array(),
-			'button' => array(
-				'button' => array(
-					'label' => esc_html__( 'Button', 'et_builder' ),
 				),
 			),
 		);
@@ -93,6 +81,23 @@ class DICM_CTA_Has_Partial_VB_Support extends ET_Builder_Module {
 				),
 				'toggle_slug'     => 'button',
 				'description'     => esc_html__( 'Choose whether your link opens in a new window or not', 'dicm-divi-custom-modules' ),
+			),
+		);
+	}
+
+	/**
+	 * Module's advanced options configuration
+	 *
+	 * @since ??
+	 *
+	 * @return array
+	 */
+	function get_advanced_options_config() {
+		return array(
+			'button' => array(
+				'button' => array(
+					'label' => esc_html__( 'Button', 'et_builder' ),
+				),
 			),
 		);
 	}
