@@ -13,6 +13,9 @@ class DICM_CTA_Child extends ET_Builder_Module {
 	// If the attribute defined on $this->child_title_var is empty, this attribute will be used instead
 	public $child_title_fallback_var = 'subtitle';
 
+	// Full Visual Builder support
+	public $vb_support = 'on';
+
 	/**
 	 * Module properties initialization
 	 *

@@ -4,6 +4,9 @@ class DICM_CTA_Parent extends ET_Builder_Module {
 	// Module slug (also used as shortcode tag)
 	public $slug       = 'dicm_cta_parent';
 
+	// Full Visual Builder support
+	public $vb_support = 'on';
+
 	// Module item's slug
 	public $child_slug = 'dicm_cta_child';
 
@@ -11,8 +14,6 @@ class DICM_CTA_Parent extends ET_Builder_Module {
 	 * Module properties initialization
 	 *
 	 * @since ??
-	 *
-	 * @todo Remove $this->advanced_options['background'] once https://github.com/elegantthemes/Divi/issues/6913 has been addressed
 	 */
 	function init() {
 		// Module name
@@ -30,11 +31,6 @@ class DICM_CTA_Parent extends ET_Builder_Module {
 					'main_content' => esc_html__( 'Text', 'dicm-divi-custom-modules' ),
 				),
 			),
-		);
-
-		// Advanced options settings
-		$this->advanced_options = array(
-			'background' => array(),
 		);
 	}
 
