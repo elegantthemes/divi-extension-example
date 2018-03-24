@@ -906,28 +906,28 @@ class DICM_CTA_All_Options extends ET_Builder_Module {
 				<h4>%22$s</h4>
 				%23$s
 			</div>',
-			esc_html__( 'Basic Fields', '' ),
-			esc_html__( 'Text', '' ),
+			esc_html__( 'Basic Fields', 'dicm-divi-custom-modules' ),
+			esc_html__( 'Text', 'dicm-divi-custom-modules' ),
 			esc_html( $this->props['text'] ),
-			esc_html__( 'Textarea', '' ),
+			esc_html__( 'Textarea', 'dicm-divi-custom-modules' ),
 			esc_html( $this->props['textarea'] ), // 5
-			esc_html__( 'Select', '' ),
+			esc_html__( 'Select', 'dicm-divi-custom-modules' ),
 			esc_html( $this->props['select'] ),
-			esc_html__( 'Toggle', '' ),
+			esc_html__( 'Toggle', 'dicm-divi-custom-modules' ),
 			esc_html( $this->props['toggle'] ),
-			esc_html__( 'Multiple Buttons', '' ), // 10
+			esc_html__( 'Multiple Buttons', 'dicm-divi-custom-modules' ), // 10
 			esc_html( $this->props['multiple_buttons'] ),
-			esc_html__( 'Multiple Checkboxes', '' ),
+			esc_html__( 'Multiple Checkboxes', 'dicm-divi-custom-modules' ),
 			esc_html( $this->props['multiple_checkboxes'] ),
-			esc_html__( 'Input Range', '' ),
+			esc_html__( 'Input Range', 'dicm-divi-custom-modules' ),
 			esc_html( $this->props['input_range'] ), // 15
-			esc_html__( 'Input Date Time', '' ),
+			esc_html__( 'Input Date Time', 'dicm-divi-custom-modules' ),
 			esc_html( $this->props['input_datetime'] ),
-			esc_html__( 'Input Margin', '' ),
+			esc_html__( 'Input Margin', 'dicm-divi-custom-modules' ),
 			esc_html( $this->props['input_margin'] ),
-			esc_html__( 'Checkboxes Category', '' ), // 20
+			esc_html__( 'Checkboxes Category', 'dicm-divi-custom-modules' ), // 20
 			esc_html( $this->props['checkboxes_category'] ),
-			esc_html__( 'Select Sidebar', '' ),
+			esc_html__( 'Select Sidebar', 'dicm-divi-custom-modules' ),
 			esc_html( $this->props['select_sidebar'] )
 		);
 
@@ -938,8 +938,8 @@ class DICM_CTA_All_Options extends ET_Builder_Module {
 				<h4>%2$s</h4>
 				%3$s
 			</div>',
-			esc_html__( 'Code Fields', '' ),
-			esc_html__( 'Codemirror', '' ),
+			esc_html__( 'Code Fields', 'dicm-divi-custom-modules' ),
+			esc_html__( 'Codemirror', 'dicm-divi-custom-modules' ),
 			et_builder_convert_line_breaks( et_builder_replace_code_content_entities( $this->props['codemirror'] ) )
 		);
 
@@ -949,9 +949,9 @@ class DICM_CTA_All_Options extends ET_Builder_Module {
 			<pre>%2$s</pre>
 			<p>%3$s</p>
 			<select name="option-name">%4$s</select>',
-			esc_html__( 'Prop value: ', '' ),
+			esc_html__( 'Prop value: ', 'dicm-divi-custom-modules' ),
 			$this->props['options_list'],
-			esc_html__( 'Rendered prop value: ', '' ),
+			esc_html__( 'Rendered prop value: ', 'dicm-divi-custom-modules' ),
 			$this->render_prop( $this->props['options_list'], 'options_list', 'options_list', $render_slug )
 		);
 
@@ -960,9 +960,9 @@ class DICM_CTA_All_Options extends ET_Builder_Module {
 			<pre>%2$s</pre>
 			<p>%3$s</p>
 			<p>%4$s</p>',
-			esc_html__( 'Prop value: ', '' ),
+			esc_html__( 'Prop value: ', 'dicm-divi-custom-modules' ),
 			$this->props['options_list_checkbox'],
-			esc_html__( 'Rendered prop value: ', '' ),
+			esc_html__( 'Rendered prop value: ', 'dicm-divi-custom-modules' ),
 			$this->render_prop( $this->props['options_list_checkbox'], 'options_list_checkbox', 'options_list_checkbox', $render_slug )
 		);
 
@@ -971,9 +971,9 @@ class DICM_CTA_All_Options extends ET_Builder_Module {
 			<pre>%2$s</pre>
 			<p>%3$s</p>
 			<p>%4$s</p>',
-			esc_html__( 'Prop value: ', '' ),
+			esc_html__( 'Prop value: ', 'dicm-divi-custom-modules' ),
 			$this->props['options_list_radio'],
-			esc_html__( 'Rendered prop value: ', '' ),
+			esc_html__( 'Rendered prop value: ', 'dicm-divi-custom-modules' ),
 			$this->render_prop( $this->props['options_list_radio'], 'options_list_radio', 'options_list_radio', $render_slug )
 		);
 
@@ -987,12 +987,12 @@ class DICM_CTA_All_Options extends ET_Builder_Module {
 				<h4>%6$s</h4>
 				%7$s
 			</div>',
-			esc_html__( 'Form Fields', '' ),
-			esc_html__( 'Option List', '' ),
+			esc_html__( 'Form Fields', 'dicm-divi-custom-modules' ),
+			esc_html__( 'Option List', 'dicm-divi-custom-modules' ),
 			et_sanitized_previously( $options_list ),
-			esc_html__( 'Option List Checkbox', '' ),
+			esc_html__( 'Option List Checkbox', 'dicm-divi-custom-modules' ),
 			et_sanitized_previously( $options_list_checkbox ), // 5
-			esc_html__( 'Option List Radio', '' ),
+			esc_html__( 'Option List Radio', 'dicm-divi-custom-modules' ),
 			et_sanitized_previously( $options_list_radio )
 		);
 
@@ -1002,9 +1002,9 @@ class DICM_CTA_All_Options extends ET_Builder_Module {
 			<pre>%2$s</pre>
 			<p>%3$s</p>
 			<p>%4$s</p>',
-			esc_html__( 'Prop value: ', '' ),
+			esc_html__( 'Prop value: ', 'dicm-divi-custom-modules' ),
 			$this->props['select_fonticon'],
-			esc_html__( 'Rendered prop value: ', '' ),
+			esc_html__( 'Rendered prop value: ', 'dicm-divi-custom-modules' ),
 			$this->render_prop( $this->props['select_fonticon'], 'select_fonticon', 'select_fonticon', $render_slug )
 		);
 
@@ -1018,12 +1018,12 @@ class DICM_CTA_All_Options extends ET_Builder_Module {
 				<h4>%6$s</h4>
 				%7$s
 			</div>',
-			esc_html__( 'Typography Fields', '' ),
-			esc_html__( 'Select Font Icon', '' ),
+			esc_html__( 'Typography Fields', 'dicm-divi-custom-modules' ),
+			esc_html__( 'Select Font Icon', 'dicm-divi-custom-modules' ),
 			et_sanitized_previously( $font_icon ),
-			esc_html__( 'Select Text Align', '' ),
+			esc_html__( 'Select Text Align', 'dicm-divi-custom-modules' ),
 			esc_html( $this->props['text_align'] ), // 5
-			esc_html__( 'Select Font', '' ),
+			esc_html__( 'Select Font', 'dicm-divi-custom-modules' ),
 			esc_html( $this->props['select_font'] )
 		);
 
@@ -1057,10 +1057,10 @@ class DICM_CTA_All_Options extends ET_Builder_Module {
 				%5$s
 				<div class="colorpicker-preview color-alpha"></div>
 			</div>',
-			esc_html__( 'Color Fields', '' ),
-			esc_html__( 'Color', '' ),
+			esc_html__( 'Color Fields', 'dicm-divi-custom-modules' ),
+			esc_html__( 'Color', 'dicm-divi-custom-modules' ),
 			esc_html( $this->props['color'] ),
-			esc_html__( 'Color Alpha', '' ),
+			esc_html__( 'Color Alpha', 'dicm-divi-custom-modules' ),
 			esc_html( $this->props['color_alpha'] ) // 5
 		);
 
@@ -1091,9 +1091,9 @@ class DICM_CTA_All_Options extends ET_Builder_Module {
 			<pre>%2$s</pre>
 			<p>%3$s</p>
 			<p>%4$s</p>',
-			esc_html__( 'Prop value: ', '' ),
+			esc_html__( 'Prop value: ', 'dicm-divi-custom-modules' ),
 			$this->props['upload'],
-			esc_html__( 'Rendered prop value: ', '' ),
+			esc_html__( 'Rendered prop value: ', 'dicm-divi-custom-modules' ),
 			$this->render_prop( $this->props['upload'], 'upload', 'upload_image', $render_slug )
 		);
 
@@ -1113,16 +1113,16 @@ class DICM_CTA_All_Options extends ET_Builder_Module {
 				%12$s
 				%13$s
 			</div>',
-			esc_html__( 'Upload Fields', '' ),
-			esc_html__( 'Upload', '' ),
+			esc_html__( 'Upload Fields', 'dicm-divi-custom-modules' ),
+			esc_html__( 'Upload', 'dicm-divi-custom-modules' ),
 			et_sanitized_previously( $upload ),
-			esc_html__( 'Gallery', '' ),
+			esc_html__( 'Gallery', 'dicm-divi-custom-modules' ),
 			esc_html( $this->props['upload_gallery'] ), // 5
-			esc_html__( 'Gallery IDs', '' ),
+			esc_html__( 'Gallery IDs', 'dicm-divi-custom-modules' ),
 			esc_html( $this->props['upload_gallery_ids'] ),
-			esc_html__( 'Gallery Orderby', '' ),
+			esc_html__( 'Gallery Orderby', 'dicm-divi-custom-modules' ),
 			esc_html( $this->props['upload_gallery_orderby'] ),
-			esc_html__( 'Gallery Captions', '' ), // 10
+			esc_html__( 'Gallery Captions', 'dicm-divi-custom-modules' ), // 10
 			esc_html( $this->props['upload_gallery_captions'] ),
 			esc_html__( 'Rendered gallery', ''),
 			$this->render_prop( $this->props['upload_gallery_ids'], 'upload_gallery', 'upload_gallery', $render_slug )
@@ -1162,26 +1162,26 @@ class DICM_CTA_All_Options extends ET_Builder_Module {
 				<h4>%20$s</h4>
 				%21$s
 			</div>',
-			esc_html__( 'Advanced Fields', '' ),
-			esc_html__( 'Address', '' ),
+			esc_html__( 'Advanced Fields', 'dicm-divi-custom-modules' ),
+			esc_html__( 'Address', 'dicm-divi-custom-modules' ),
 			esc_html( $this->props['address'] ),
-			esc_html__( 'Zoom Level', '' ),
+			esc_html__( 'Zoom Level', 'dicm-divi-custom-modules' ),
 			esc_html( $this->props['zoom_level'] ), // #5
-			esc_html__( 'Address Lat', '' ),
+			esc_html__( 'Address Lat', 'dicm-divi-custom-modules' ),
 			esc_html( $this->props['address_lat'] ),
-			esc_html__( 'Address Lan', '' ),
+			esc_html__( 'Address Lan', 'dicm-divi-custom-modules' ),
 			esc_html( $this->props['address_lng'] ),
-			esc_html__( 'Map Center', '' ), // #10
+			esc_html__( 'Map Center', 'dicm-divi-custom-modules' ), // #10
 			esc_html( $this->props['map_center'] ),
-			esc_html__( 'Tab 1 Text', '' ),
+			esc_html__( 'Tab 1 Text', 'dicm-divi-custom-modules' ),
 			esc_html( $this->props['tab_1_text'] ),
-			esc_html__( 'Tab 2 Text', '' ),
+			esc_html__( 'Tab 2 Text', 'dicm-divi-custom-modules' ),
 			esc_html( $this->props['tab_2_text'] ), // #15
-			esc_html__( 'Presets Shadow', '' ),
+			esc_html__( 'Presets Shadow', 'dicm-divi-custom-modules' ),
 			esc_html( $this->props['presets_shadow'] ),
-			esc_html__( 'Preset Affected 1', '' ),
+			esc_html__( 'Preset Affected 1', 'dicm-divi-custom-modules' ),
 			esc_html( $this->props['preset_affected_1'] ),
-			esc_html__( 'Preset Affected 2', '' ), // #20
+			esc_html__( 'Preset Affected 2', 'dicm-divi-custom-modules' ), // #20
 			esc_html( $this->props['preset_affected_2'] ),
 			et_sanitized_previously( $map )
 		);
