@@ -2,7 +2,6 @@
 import $ from 'jquery';
 
 // Internal Dependencies
-import HelloWorld from './modules/HelloWorld/HelloWorld';
 import CustomCtaFull from './modules/CustomCtaFull/CustomCtaFull';
 import CustomCtaAllOptions from './modules/CustomCtaAllOptions/CustomCtaAllOptions';
 
