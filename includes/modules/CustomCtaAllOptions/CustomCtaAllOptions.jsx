@@ -122,7 +122,7 @@ class CustomCtaAllOptions extends Component {
       case 'select_fonticon':
         output = (
           <span style={{
-            fontFamily: 'ETmodules !important',
+            fontFamily: '"ETmodules"',
             fontSize: 40
           }}>{this.props.utils.processFontIcon(value)}</span>
         );
