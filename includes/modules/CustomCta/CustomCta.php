@@ -1,5 +1,10 @@
 <?php
-
+/**
+ * Basic Call To Action module (title, content, and button) with NO builder support
+ * This module appears as placeholder box on Visual Builder
+ *
+ * @since 1.0.0
+ */
 class DICM_CTA extends ET_Builder_Module {
 	// Module slug (also used as shortcode tag)
 	public $slug       = 'dicm_cta';
@@ -7,7 +12,7 @@ class DICM_CTA extends ET_Builder_Module {
 	/**
 	 * Module properties initialization
 	 *
-	 * @since ??
+	 * @since 1.0.0
 	 */
 	function init() {
 		// Module name
@@ -15,7 +20,7 @@ class DICM_CTA extends ET_Builder_Module {
 
 		// Module Icon
 		// This character will be rendered using etbuilder font-icon. For fully customized icon, create svg icon and
-		// define its path on $this->icon_path property (see CustomCTAFull / DICM_CTA_Has_VB_Support)
+		// define its path on $this->icon_path property (see CustomCTAFull class)
 		$this->icon             = 'j';
 
 		// Toggle settings
@@ -32,7 +37,7 @@ class DICM_CTA extends ET_Builder_Module {
 	/**
 	 * Module's specific fields
 	 *
-	 * @since ??
+	 * @since 1.0.0
 	 *
 	 * @return array
 	 */
@@ -85,7 +90,7 @@ class DICM_CTA extends ET_Builder_Module {
 	/**
 	 * Module's advanced options configuration
 	 *
-	 * @since ??
+	 * @since 1.0.0
 	 *
 	 * @return array
 	 */
@@ -103,7 +108,7 @@ class DICM_CTA extends ET_Builder_Module {
 	/**
 	 * Render module output
 	 *
-	 * @since ??
+	 * @since 1.0.0
 	 *
 	 * @param array  $attrs       List of unprocessed attributes
 	 * @param string $content     Content being processed

@@ -1,5 +1,11 @@
 <?php
-
+/**
+ * Parent module (module which has module item / child module) with FULL builder support
+ * This module appears on Visual Builder and requires react component to be provided
+ * Due to full builder support, all advanced options (except button options) are added by default
+ *
+ * @since 1.0.0
+ */
 class DICM_CTA_Parent extends ET_Builder_Module {
 	// Module slug (also used as shortcode tag)
 	public $slug       = 'dicm_cta_parent';
@@ -13,7 +19,7 @@ class DICM_CTA_Parent extends ET_Builder_Module {
 	/**
 	 * Module properties initialization
 	 *
-	 * @since ??
+	 * @since 1.0.0
 	 */
 	function init() {
 		// Module name
@@ -37,7 +43,7 @@ class DICM_CTA_Parent extends ET_Builder_Module {
 	/**
 	 * Module's specific fields
 	 *
-	 * @since ??
+	 * @since 1.0.0
 	 *
 	 * @return array
 	 */
@@ -56,7 +62,7 @@ class DICM_CTA_Parent extends ET_Builder_Module {
 	/**
 	 * Render module output
 	 *
-	 * @since ??
+	 * @since 1.0.0
 	 *
 	 * @param array  $attrs       List of unprocessed attributes
 	 * @param string $content     Content being processed

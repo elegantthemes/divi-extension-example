@@ -1,5 +1,12 @@
 <?php
-
+/**
+ * Basic Call To Action module (title, content, and button) with FULL builder support which contains
+ * all possible fields that can be used on 3rd party module
+ * This module appears on Visual Builder and requires react component to be provided
+ * Due to full builder support, all advanced options (except button options) are added by default
+ *
+ * @since 1.0.0
+ */
 class DICM_CTA_All_Options extends ET_Builder_Module {
 	// Module slug (also used as shortcode tag)
 	public $slug       = 'dicm_cta_all_options';
@@ -15,14 +22,14 @@ class DICM_CTA_All_Options extends ET_Builder_Module {
 	/**
 	 * Module properties initialization
 	 *
-	 * @since ??
+	 * @since 1.0.0
 	 */
 	function init() {
 		// Module name
 		$this->name             = esc_html__( 'Custom CTA All Options', 'dicm-divi-custom-modules' );
 
 		// Module Icon
-		// $this->icon             = 'x';
+		// $this->icon          = 'x';
 		$this->icon_path        =  plugin_dir_path( __FILE__ ) . 'icon.svg';
 
 		// Custom modal tab options.
@@ -91,16 +98,6 @@ class DICM_CTA_All_Options extends ET_Builder_Module {
 			),
 		);
 
-		// Advanced options settings
-		$this->advanced_options = array(
-			'background' => array(),
-			'button' => array(
-				'button' => array(
-					'label' => esc_html__( 'Button', 'et_builder' ),
-				),
-			),
-		);
-
 		// %%order_class%% is unique class that is used to target this module's styling. Its output
 		// is based on slug + module order which in this module's case will be translated into
 		// `.et_demo_module_0`. If for some reason (mostly CSS quirks) you need stronger base selector
@@ -113,20 +110,20 @@ class DICM_CTA_All_Options extends ET_Builder_Module {
 		// use the same set of fields with slight differences (i.e.: most modules have box shadow
 		// fields but Blurb has additional box-shadow fields for its image) so advanced options
 		// enables module to declare minimum variable to auto generate commonly used fields.
+		// NOTE: IF MODULE HAS PARTIAL OR FULL BUILDER SUPPORT, ALL ADVANCED OPTIONS (EXCEPT BUTTON) ARE ADDED BY DEFAULT
 		$this->advanced_options = array();
 
-		// The following advanced options are automatically added regardless being defined or not
+		// The following advanced options are automatically added regardless builder support or explicit definition
 		// Tabs     | Toggles          | Fields
 		// --------- ------------------ -------------
-		// Design   | Text             | Text Shadow. There's an issue on this tho: https://github.com/elegantthemes/Divi/issues/6808
 		// Design   | Border           | Rounded Corners (multiple fields)
 		// Design   | Border           | Border Styles (multiple fields)
-		// Design   | Box Shadow       | Box Shadow (multiple fields)
 		// Design   | Box Shadow       | Box Shadow (multiple fields)
 		// Design   | Animation        | Animation (multiple fields)
 		// Note: If you notice // default mark after the configuration attribute, it means that
 		// Divi automatically adds this value. This attribute can be left undeclared if you're
 		// aiming to use default value
+
 		// Add advanced options: module background
 		// There can only be one module background so its setting can be as minimal as possible.
 		// The location of the background is at Content > Background > Background
@@ -203,8 +200,6 @@ class DICM_CTA_All_Options extends ET_Builder_Module {
 		// text_orientation are commonly not printing anything; the attribute is used to outputs
 		// text-align affecting class name. To manually output CSS styling, `css` attribute containing
 		// `text` orientation and valid selector template needs to be declared
-		//
-		// @TODO explore the possibility of simplifying this. This seems over-complicated :thinking:
 		$this->advanced_options['text'] = array(
 			'use_text_orientation'  => true, // default
 			'css' => array(
@@ -257,7 +252,9 @@ class DICM_CTA_All_Options extends ET_Builder_Module {
 
 		// Add advanced options: animation
 		// Advanced animation options is automatically added to all module except to module item
-		// @TODO enable animation to be disabled
+		// It doesn't have many option except to have it disabled (uncomment the line below to try it)
+		// $this->advanced_options['animation'] = false;
+
 		// Add advanced options: text shadow
 		// Text shadow option is automatically added when advanced_options property is defined.
 		// Module normally only defined one advanced advanced text shadow fields but it accepts
@@ -316,7 +313,7 @@ class DICM_CTA_All_Options extends ET_Builder_Module {
 	 *   Advanced | Custom CSS       | After
 	 *   Advanced | Visibility       | Disable On
 	 *
-	 * @since ??
+	 * @since 1.0.0
 	 *
 	 * @return array
 	 */
@@ -636,8 +633,9 @@ class DICM_CTA_All_Options extends ET_Builder_Module {
 	/**
 	 * Render prop value
 	 * Some prop value needs to be parsed before can be used
+	 * This method is added to display how to parse certain saved value
 	 *
-	 * @since
+	 * @since 1.0.0
 	 *
 	 * @param string|array $value
 	 * @param string       $field_name
@@ -751,7 +749,7 @@ class DICM_CTA_All_Options extends ET_Builder_Module {
 	/**
 	 * Render module output
 	 *
-	 * @since ??
+	 * @since 1.0.0
 	 *
 	 * @param array  $attrs       List of unprocessed attributes
 	 * @param string $content     Content being processed
@@ -1063,11 +1061,8 @@ class DICM_CTA_All_Options extends ET_Builder_Module {
 		);
 
 		// Render wrapper
+		// Module with full builder support DOES NOT need to wrap its render() output with $this->_render_module_wrapper()
 		return $output;
-
-		// 3rd party module with no full VB support has to wrap its render output with $this->_render_module_wrapper().
-		// This method will automatically add module attributes and proper structure for parallax image/video background
-		// return $this->_render_module_wrapper( $output, $render_slug );
 	}
 }
 

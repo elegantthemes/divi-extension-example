@@ -39,8 +39,11 @@ class DICM_DiviCustomModules extends DiviExtension {
 	 * @param array  $args
 	 */
 	public function __construct( $name = 'divi-custom-modules', $args = array() ) {
-		$this->plugin_dir     = plugin_dir_path( __DIR__ );
-		$this->plugin_dir_url = plugin_dir_url( $this->plugin_dir );
+		$this->plugin_dir              = plugin_dir_path( __DIR__ );
+		$this->plugin_dir_url          = plugin_dir_url( $this->plugin_dir );
+
+		// Provide localized strings for Visual Builder component. These array will automatically enqueued
+		// for Visual Builder component script and can be accessed using `window.DiviCustomModulesSettings` variable
 		$this->builder_localize_script = array(
 			'i10n' => array(
 				'dicm_cta_all_options' => array(

@@ -6,6 +6,13 @@ import './style.css';
 
 
 class CustomCtaAllOptions extends Component {
+  /**
+   * Declare all component on-page styling on this method
+   *
+   * @since 1.0.0
+   *
+   * @return array
+   */
   css() {
     const attrs = this.props;
     const utils = this.props.utils;
@@ -46,6 +53,11 @@ class CustomCtaAllOptions extends Component {
     return additionalCss;
   }
 
+  /**
+   * Custom method to render button UI
+   *
+   * @return object (JSX)
+   */
   renderButton() {
     const attrs = this.props;
     const utils = this.props.utils;
@@ -68,6 +80,11 @@ class CustomCtaAllOptions extends Component {
     );
   }
 
+  /**
+   * Render prop value. Some attribute values need to be parsed before can be displayed
+   *
+   * @return mixed
+   */
   renderProp(value, fieldName, fieldType, renderSlug) {
     const utils = this.props.utils;
     const _ = utils._;
@@ -153,6 +170,11 @@ class CustomCtaAllOptions extends Component {
     return output;
   }
 
+  /**
+   * Render component output
+   *
+   * @return object (JSX)
+   */
   render() {
     const i10n = window.DiviCustomModulesSettings.i10n.dicm_cta_all_options;
     const attrs = this.props;
@@ -194,7 +216,6 @@ class CustomCtaAllOptions extends Component {
         <div className="code-fields fields-group">
           <h3>{i10n.code_fields}</h3>
           <h4>{i10n.codemirror}</h4>
-          {/* @todo: figure out how to pass down ETEditableBlock component  */}
           {attrs.codemirror}
         </div>
 

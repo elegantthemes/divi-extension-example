@@ -7,6 +7,7 @@ import CustomCtaAllOptions from './modules/CustomCtaAllOptions/CustomCtaAllOptio
 import CustomCtaParent from './modules/CustomCtaParent/CustomCtaParent';
 import CustomCtaChild from './modules/CustomCtaChild/CustomCtaChild';
 
+// Register 3rd party module component
 $(window).on('et_builder_api_ready', (event, API) => {
   API.registerModule('dicm_cta_vb', CustomCtaFull);
   API.registerModule('dicm_cta_all_options', CustomCtaAllOptions);
