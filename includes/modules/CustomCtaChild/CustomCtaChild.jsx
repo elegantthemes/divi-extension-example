@@ -12,7 +12,6 @@ class CustomCtaChild extends Component {
     const isCustomButtonIcon = utils.hasValue(attrs.button_icon);
     const buttonIcon = isCustomButtonIcon ? utils.processFontIcon(attrs.button_icon) : false;
     const buttonClassName = {
-      et_pb_promo_button: true,
       et_pb_button: true,
       et_pb_custom_button_icon: isCustomButtonIcon,
     };
