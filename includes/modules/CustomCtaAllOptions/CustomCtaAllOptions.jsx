@@ -6,6 +6,30 @@ import './style.css';
 
 
 class CustomCtaAllOptions extends Component {
+  css() {
+    const attrs = this.props;
+    const utils = this.props.utils;
+    const additionalCss = [];
+
+    // Process text-align value into style
+    if (utils.hasValue(attrs.text_align)) {
+      additionalCss.push([{
+        selector: '%%order_class%% .typography-fields',
+        declaration: `text-align: ${attrs.text_align};`,
+      }]);
+    }
+
+    // Process font option into style
+    if (utils.hasValue(attrs.select_font)) {
+      additionalCss.push([{
+        selector: '%%order_class%% .typography-fields',
+        declaration: utils.setElementFont(attrs.select_font),
+      }]);
+    }
+
+    return additionalCss;
+  }
+
   renderButton() {
     const attrs = this.props;
     const utils = this.props.utils;
@@ -75,6 +99,34 @@ class CustomCtaAllOptions extends Component {
           });
         }
         break;
+      case 'options_list_radio':
+        value = _.replace(_.replace(value, optionSearch[0], optionReplace[0]), optionSearch[1], optionReplace[1]);
+        value = JSON.parse( value );
+
+        const radioName  = `${orderClass}_${fieldName}`;
+
+        if (_.isArray(value)) {
+          output = value.map((option, index) => {
+            const radioId = `${radioName}_radio_${index}`;
+            const isChecked = 1 === option.checked;
+
+            return(
+              <span key={`${orderClass}-${index}`} className="radio-wrap">
+                <input type="radio" id={radioId} className="input" value={option.value} name={radioName} checked={isChecked} />
+                <label htmlFor={radioId}><i></i>{option.value}</label>
+              </span>
+            );
+          });
+        }
+        break;
+      case 'select_fonticon':
+        output = (
+          <span style={{
+            fontFamily: 'ETmodules !important',
+            fontSize: 40
+          }}>{this.props.utils.processFontIcon(value)}</span>
+        );
+        break;
       default:
         output = value;
         break;
@@ -86,6 +138,9 @@ class CustomCtaAllOptions extends Component {
   render() {
     const i10n = window.DiviCustomModulesSettings.i10n.dicm_cta_all_options;
     const attrs = this.props;
+
+    // Set 3rd party component's css
+    this.props.css(this.css());
 
     return (
       <div>
@@ -127,13 +182,16 @@ class CustomCtaAllOptions extends Component {
 
         <div className="form-fields fields-group">
           <h3>{i10n.form_fields}</h3>
+
           <h4>{i10n.option_list}</h4>
+
             <p>{i10n.prop_value}</p>
             <pre>{attrs.option_list}</pre>
             <p>{i10n.rendered_prop_value}</p>
             <select name="option-name">
               {this.renderProp(attrs.options_list, 'options_list', 'options_list', attrs.moduleInfo.type)}
             </select>
+
           <h4>{i10n.option_list_checkbox}</h4>
             <p>{i10n.prop_value}</p>
             <pre>{attrs.options_list_checkbox}</pre>
@@ -141,11 +199,31 @@ class CustomCtaAllOptions extends Component {
             <p>
               {this.renderProp(attrs.options_list_checkbox, 'options_list_checkbox', 'options_list_checkbox', attrs.moduleInfo.type)}
             </p>
-          <h4>{i10n.option_list_radio}</h4>
 
+          <h4>{i10n.option_list_radio}</h4>
+            <p>{i10n.prop_value}</p>
+            <pre>{attrs.options_list_radio}</pre>
+            <p>{i10n.rendered_prop_value}</p>
+            <p>
+              {this.renderProp(attrs.options_list_radio, 'options_list_radio', 'options_list_radio', attrs.moduleInfo.type)}
+            </p>
         </div>
 
+        <div className="typography-fields fields-group">
+          <h3>{i10n.typography_fields}</h3>
 
+          <h4>{i10n.select_font_icon}</h4>
+            <p>{i10n.prop_value}</p>
+            <pre>{attrs.select_fonticon}</pre>
+            <p>{i10n.rendered_prop_value}</p>
+            <p>{this.renderProp(attrs.select_fonticon, 'select_fonticon', 'select_fonticon', attrs.moduleInfo.type)}</p>
+
+          <h4>{i10n.select_text_align}</h4>
+            {attrs.text_align}
+
+          <h4>{i10n.select_font}</h4>
+            {attrs.select_font}
+        </div>
 
         <div className="form-fields fields-group">
 
