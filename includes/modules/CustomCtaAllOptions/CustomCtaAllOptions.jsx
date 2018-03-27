@@ -146,9 +146,6 @@ class CustomCtaAllOptions extends Component {
       case 'upload_image':
         output = <img src={value} alt='' />;
         break;
-      case 'upload_gallery':
-        output = value;
-        break;
       default:
         output = value;
         break;
@@ -267,25 +264,25 @@ class CustomCtaAllOptions extends Component {
             <pre>{attrs.upload}</pre>
             <p>{i10n.rendered_prop_value}</p>
             <p>{this.renderProp(attrs.upload, 'upload', 'upload_image', attrs.moduleInfo.type)}</p>
-
-          <h4>{i10n.gallery}</h4>
-            {attrs.upload_gallery}
-
-          <h4>{i10n.gallery_ids}</h4>
-            {attrs.upload_gallery_ids}
-
-          <h4>{i10n.gallery_orderby}</h4>
-            {attrs.upload_gallery_orderby}
-
-          <h4>{i10n.gallery_captions}</h4>
-            {attrs.upload_gallery_captions}
-
-          <h4>{i10n.rendered_gallery}</h4>
-            {this.renderProp(attrs.upload_gallery_ids, 'upload_gallery', 'upload_gallery', attrs.moduleInfo.type)}
         </div>
 
-        <div className="form-fields fields-group">
+        <div className="advanced-fields fields-group">
+          <h3>{i10n.advanced_fields}</h3>
 
+          <h4>{i10n.tab_1_text}</h4>
+          {attrs.tab_1_text}
+
+          <h4>{i10n.tab_2_text}</h4>
+          {attrs.tab_2_text}
+
+          <h4>{i10n.presets_shadow}</h4>
+          {attrs.presets_shadow}
+
+          <h4>{i10n.preset_affected_1}</h4>
+          {attrs.preset_affected_1}
+
+          <h4>{i10n.preset_affected_2}</h4>
+          {attrs.preset_affected_2}
         </div>
       </div>
     );

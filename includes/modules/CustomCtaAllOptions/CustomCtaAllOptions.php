@@ -16,8 +16,6 @@ class DICM_CTA_All_Options extends ET_Builder_Module {
 	 * Module properties initialization
 	 *
 	 * @since ??
-	 *
-	 * @todo Remove $this->advanced_options['background'] once https://github.com/elegantthemes/Divi/issues/6913 has been addressed
 	 */
 	function init() {
 		// Module name
@@ -532,70 +530,6 @@ class DICM_CTA_All_Options extends ET_Builder_Module {
 				'tab_slug'           => $all_types_tab_slug,
 				'toggle_slug'        => 'upload',
 			),
-			'upload_gallery' => array(
-				'label'           => esc_html__( 'Gallery Images', 'et_builder' ),
-				'type'            => 'upload_gallery',
-				'overwrite'       => array(
-					'ids'         => 'upload_gallery_ids',
-					'orderby'     => 'upload_gallery_orderby',
-					'captions'    => 'upload_gallery_captions',
-				),
-				'tab_slug'           => $all_types_tab_slug,
-				'toggle_slug'        => 'upload',
-			),
-			'upload_gallery_ids' => array(
-				'type'               => 'hidden',
-				'tab_slug'           => $all_types_tab_slug,
-				'toggle_slug'        => 'upload',
-			),
-			'upload_gallery_orderby' => array(
-				'type'               => 'hidden',
-				'tab_slug'           => $all_types_tab_slug,
-				'toggle_slug'        => 'upload',
-			),
-			'upload_gallery_captions' => array(
-				'type'               => 'hidden',
-				'tab_slug'           => $all_types_tab_slug,
-				'toggle_slug'        => 'upload',
-			),
-
-			// Map Start
-			// @todo abstracting map's fixed variable so it can be reused on other module
-			'address' => array(
-				'label'             => esc_html__( 'Map Address', 'et_builder' ),
-				'type'              => 'text',
-				'option_category'   => 'basic_option',
-				'additional_button' => sprintf(
-					' <a href="#" class="et_pb_find_address button">%1$s</a>',
-					esc_html__( 'Find', 'et_builder' )
-				),
-				'class' => array( 'et_pb_address' ),
-				'description'       => esc_html__( 'Enter an address for the map center point, and the address will be geocoded and displayed on the map below.', 'et_builder' ),
-				'tab_slug'           => $all_types_tab_slug,
-				'toggle_slug'       => 'advanced',
-			),
-			'zoom_level' => array(
-				'type'    => 'hidden',
-				'class'   => array( 'et_pb_zoom_level' ),
-				'default' => '18',
-				'default_on_front'=> true,
-			),
-			'address_lat' => array(
-				'type'  => 'hidden',
-				'class' => array( 'et_pb_address_lat' ),
-			),
-			'address_lng' => array(
-				'type'  => 'hidden',
-				'class' => array( 'et_pb_address_lng' ),
-			),
-			'map_center' => array(
-				'type'                  => 'center_map',
-				'use_container_wrapper' => false,
-				'tab_slug'              => $all_types_tab_slug,
-				'toggle_slug'           => 'advanced',
-			),
-			// Map End
-
 			'composite_tabbed' => array(
 				'label'               => esc_html__( 'Composite Tabbed', 'et_builder' ),
 				'tab_slug'            => $all_types_tab_slug,
@@ -806,38 +740,6 @@ class DICM_CTA_All_Options extends ET_Builder_Module {
 					esc_attr( $value )
 				);
 				break;
-			case 'upload_gallery':
-				$gallery_shortcode = sprintf(
-					'[gallery ids="%1$s"]',
-					esc_attr( $value )
-				);
-
-				$output = do_shortcode( $gallery_shortcode );
-				break;
-			case 'map':
-				if ( et_pb_enqueue_google_maps_script() ) {
-					wp_enqueue_script( 'google-maps-api' );
-				}
-
-				$map_default = array(
-					'zoom_level'  => '',
-					'address_lat' => '',
-					'address_lng' => '',
-					'map_center'  => '',
-				);
-
-				$map_args = wp_parse_args( $value, $map_default );
-
-				$output = sprintf(
-					'<div class="dicm_map et_pb_map_container">
-						<div class="et_pb_map" data-center-lat="%1$s" data-center-lng="%2$s" data-zoom="%3$d" data-mouse-wheel="on" data-mobile-dragging="on"></div>
-					</div>',
-					esc_attr( $map_args['address_lat'] ),
-					esc_attr( $map_args['address_lng'] ),
-					esc_attr( $map_args['zoom_level'] )
-				);
-				break;
-
 			default:
 				$output = $value;
 				break;
@@ -1102,41 +1004,13 @@ class DICM_CTA_All_Options extends ET_Builder_Module {
 				<h3>%1$s</h3>
 				<h4>%2$s</h4>
 				%3$s
-				<h4>%4$s</h4>
-				%5$s
-				<h4>%6$s</h4>
-				%7$s
-				<h4>%8$s</h4>
-				%9$s
-				<h4>%10$s</h4>
-				%11$s
-				%12$s
-				%13$s
 			</div>',
 			esc_html__( 'Upload Fields', 'dicm-divi-custom-modules' ),
 			esc_html__( 'Upload', 'dicm-divi-custom-modules' ),
-			et_sanitized_previously( $upload ),
-			esc_html__( 'Gallery', 'dicm-divi-custom-modules' ),
-			esc_html( $this->props['upload_gallery'] ), // 5
-			esc_html__( 'Gallery IDs', 'dicm-divi-custom-modules' ),
-			esc_html( $this->props['upload_gallery_ids'] ),
-			esc_html__( 'Gallery Orderby', 'dicm-divi-custom-modules' ),
-			esc_html( $this->props['upload_gallery_orderby'] ),
-			esc_html__( 'Gallery Captions', 'dicm-divi-custom-modules' ), // 10
-			esc_html( $this->props['upload_gallery_captions'] ),
-			esc_html__( 'Rendered gallery', ''),
-			$this->render_prop( $this->props['upload_gallery_ids'], 'upload_gallery', 'upload_gallery', $render_slug )
+			et_sanitized_previously( $upload )
 		);
 
 		// Advanced fields
-		$map = $this->render_prop( array(
-			'address'     => $this->props['address'],
-			'zoom_level'  => $this->props['zoom_level'],
-			'address_lat' => $this->props['address_lat'],
-			'address_lng' => $this->props['address_lng'],
-			'map_center'  => $this->props['map_center'],
-		), 'map', 'map', $render_slug );
-
 		$advanced_fields = sprintf(
 			'<div class="advanced-fields fields-group">
 				<h3>%1$s</h3>
@@ -1150,40 +1024,18 @@ class DICM_CTA_All_Options extends ET_Builder_Module {
 				%9$s
 				<h4>%10$s</h4>
 				%11$s
-				%22$s
-				<h4>%12$s</h4>
-				%13$s
-				<h4>%14$s</h4>
-				%15$s
-				<h4>%16$s</h4>
-				%17$s
-				<h4>%18$s</h4>
-				%19$s
-				<h4>%20$s</h4>
-				%21$s
 			</div>',
 			esc_html__( 'Advanced Fields', 'dicm-divi-custom-modules' ),
-			esc_html__( 'Address', 'dicm-divi-custom-modules' ),
-			esc_html( $this->props['address'] ),
-			esc_html__( 'Zoom Level', 'dicm-divi-custom-modules' ),
-			esc_html( $this->props['zoom_level'] ), // #5
-			esc_html__( 'Address Lat', 'dicm-divi-custom-modules' ),
-			esc_html( $this->props['address_lat'] ),
-			esc_html__( 'Address Lan', 'dicm-divi-custom-modules' ),
-			esc_html( $this->props['address_lng'] ),
-			esc_html__( 'Map Center', 'dicm-divi-custom-modules' ), // #10
-			esc_html( $this->props['map_center'] ),
 			esc_html__( 'Tab 1 Text', 'dicm-divi-custom-modules' ),
 			esc_html( $this->props['tab_1_text'] ),
 			esc_html__( 'Tab 2 Text', 'dicm-divi-custom-modules' ),
-			esc_html( $this->props['tab_2_text'] ), // #15
+			esc_html( $this->props['tab_2_text'] ), // #5
 			esc_html__( 'Presets Shadow', 'dicm-divi-custom-modules' ),
 			esc_html( $this->props['presets_shadow'] ),
 			esc_html__( 'Preset Affected 1', 'dicm-divi-custom-modules' ),
 			esc_html( $this->props['preset_affected_1'] ),
-			esc_html__( 'Preset Affected 2', 'dicm-divi-custom-modules' ), // #20
-			esc_html( $this->props['preset_affected_2'] ),
-			et_sanitized_previously( $map )
+			esc_html__( 'Preset Affected 2', 'dicm-divi-custom-modules' ), // #10
+			esc_html( $this->props['preset_affected_2'] )
 		);
 
 		// Render module content
