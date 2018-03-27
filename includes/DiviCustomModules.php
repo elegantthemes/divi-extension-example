@@ -1,5 +1,8 @@
 <?php
 
+// Remove comment block of constant below to activate debug mode
+// define( 'DICM_DEBUG', true );
+
 class DICM_DiviCustomModules extends DiviExtension {
 
 	/**
