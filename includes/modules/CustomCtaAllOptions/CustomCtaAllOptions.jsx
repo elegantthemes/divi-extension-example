@@ -27,6 +27,22 @@ class CustomCtaAllOptions extends Component {
       }]);
     }
 
+    // Process color preview color
+    if (utils.hasValue(attrs.color)) {
+      additionalCss.push([{
+        selector: '%%order_class%% .colorpicker-preview.color',
+        declaration: `background-color: ${attrs.color};`,
+      }]);
+    }
+
+    // Process color preview color alpha
+    if (utils.hasValue(attrs.color_alpha)) {
+      additionalCss.push([{
+        selector: '%%order_class%% .colorpicker-preview.color-alpha',
+        declaration: `background-color: ${attrs.color_alpha};`,
+      }]);
+    }
+
     return additionalCss;
   }
 
@@ -127,6 +143,12 @@ class CustomCtaAllOptions extends Component {
           }}>{this.props.utils.processFontIcon(value)}</span>
         );
         break;
+      case 'upload_image':
+        output = <img src={value} alt='' />;
+        break;
+      case 'upload_gallery':
+        output = value;
+        break;
       default:
         output = value;
         break;
@@ -223,6 +245,43 @@ class CustomCtaAllOptions extends Component {
 
           <h4>{i10n.select_font}</h4>
             {attrs.select_font}
+        </div>
+
+        <div className="color-fields fields-group">
+          <h3>{i10n.color_fields}</h3>
+
+          <h4>{i10n.color}</h4>
+            {attrs.color}
+            <div className="colorpicker-preview color"></div>
+
+          <h4>{i10n.color_alpha}</h4>
+            {attrs.color_alpha}
+            <div className="colorpicker-preview color-alpha"></div>
+        </div>
+
+        <div className="upload-fields fields-group">
+          <h3>{i10n.upload_fields}</h3>
+
+          <h4>{i10n.upload}</h4>
+            <p>{i10n.prop_value}</p>
+            <pre>{attrs.upload}</pre>
+            <p>{i10n.rendered_prop_value}</p>
+            <p>{this.renderProp(attrs.upload, 'upload', 'upload_image', attrs.moduleInfo.type)}</p>
+
+          <h4>{i10n.gallery}</h4>
+            {attrs.upload_gallery}
+
+          <h4>{i10n.gallery_ids}</h4>
+            {attrs.upload_gallery_ids}
+
+          <h4>{i10n.gallery_orderby}</h4>
+            {attrs.upload_gallery_orderby}
+
+          <h4>{i10n.gallery_captions}</h4>
+            {attrs.upload_gallery_captions}
+
+          <h4>{i10n.rendered_gallery}</h4>
+            {this.renderProp(attrs.upload_gallery_ids, 'upload_gallery', 'upload_gallery', attrs.moduleInfo.type)}
         </div>
 
         <div className="form-fields fields-group">
