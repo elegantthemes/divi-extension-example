@@ -23,15 +23,15 @@ class DICM_CTA_Parent extends ET_Builder_Module {
 	 */
 	function init() {
 		// Module name
-		$this->name             = esc_html__( 'Custom CTA Parent', 'dicm-divi-custom-modules' );
+		$this->name                    = esc_html__( 'Custom CTA Parent', 'dicm-divi-custom-modules' );
 
 		// Module Icon
 		// Load customized svg icon and use it on builder as module icon. If you don't have svg icon, you can use
 		// $this->icon for using etbuilder font-icon. (See CustomCta / DICM_CTA class)
-		$this->icon_path        =  plugin_dir_path( __FILE__ ) . 'icon.svg';
+		$this->icon_path               =  plugin_dir_path( __FILE__ ) . 'icon.svg';
 
 		// Toggle settings
-		$this->options_toggles  = array(
+		$this->settings_modal_toggles  = array(
 			'general'  => array(
 				'toggles' => array(
 					'main_content' => esc_html__( 'Text', 'dicm-divi-custom-modules' ),

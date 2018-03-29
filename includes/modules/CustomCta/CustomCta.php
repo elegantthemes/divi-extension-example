@@ -24,7 +24,7 @@ class DICM_CTA extends ET_Builder_Module {
 		$this->icon             = 'j';
 
 		// Toggle settings
-		$this->options_toggles  = array(
+		$this->settings_modal_toggles  = array(
 			'general'  => array(
 				'toggles' => array(
 					'main_content' => esc_html__( 'Text', 'dicm-divi-custom-modules' ),
@@ -94,11 +94,22 @@ class DICM_CTA extends ET_Builder_Module {
 	 *
 	 * @return array
 	 */
-	function get_advanced_options_config() {
+	function get_advanced_fields_config() {
 		return array(
 			'button' => array(
 				'button' => array(
 					'label' => esc_html__( 'Button', 'et_builder' ),
+				),
+			),
+			'borders'               => array(
+				'default' => array(),
+				'image'   => array(
+					'css'             => array(
+						'main' => array(
+							'border_radii' => "%%order_class%% .et_pb_main_blurb_image .et_pb_image_wrap",
+							'border_styles' => "%%order_class%% .et_pb_main_blurb_image .et_pb_image_wrap",
+						)
+					),
 				),
 			),
 		);

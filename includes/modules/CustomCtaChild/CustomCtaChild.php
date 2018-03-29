@@ -41,21 +41,11 @@ class DICM_CTA_Child extends ET_Builder_Module {
 		$this->settings_text = esc_html__( 'CTA Item Settings', 'et_builder' );
 
 		// Toggle settings
-		$this->options_toggles  = array(
+		$this->settings_modal_toggles  = array(
 			'general'  => array(
 				'toggles' => array(
 					'main_content' => esc_html__( 'Text', 'dicm-divi-custom-modules' ),
 					'button'       => esc_html__( 'Button', 'dicm-divi-custom-modules' ),
-				),
-			),
-		);
-
-		// Advanced options settings
-		$this->advanced_options = array(
-			'background' => array(),
-			'button' => array(
-				'button' => array(
-					'label' => esc_html__( 'Button', 'et_builder' ),
 				),
 			),
 		);
@@ -117,6 +107,23 @@ class DICM_CTA_Child extends ET_Builder_Module {
 				),
 				'toggle_slug'     => 'button',
 				'description'     => esc_html__( 'Choose whether your link opens in a new window or not', 'dicm-divi-custom-modules' ),
+			),
+		);
+	}
+
+	/**
+	 * Module's advanced fields configuration
+	 *
+	 * @since 1.0.0
+	 *
+	 * @return array
+	 */
+	function get_advanced_fields_config() {
+		return array(
+			'button' => array(
+				'button' => array(
+					'label' => esc_html__( 'Button', 'et_builder' ),
+				),
 			),
 		);
 	}
