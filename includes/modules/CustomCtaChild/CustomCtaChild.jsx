@@ -6,24 +6,24 @@ import './style.css';
 
 class CustomCtaChild extends Component {
   renderButton() {
-    const attrs = this.props;
+    const props = this.props;
     const utils = this.props.utils;
-    const buttonTarget = 'on' === attrs.url_new_window ? '_blank' : '';
-    const isCustomButtonIcon = utils.hasValue(attrs.button_icon);
-    const buttonIcon = isCustomButtonIcon ? utils.processFontIcon(attrs.button_icon) : false;
+    const buttonTarget = 'on' === props.url_new_window ? '_blank' : '';
+    const isCustomButtonIcon = utils.hasValue(props.button_icon);
+    const buttonIcon = isCustomButtonIcon ? utils.processFontIcon(props.button_icon) : false;
     const buttonClassName = {
       et_pb_button: true,
       et_pb_custom_button_icon: isCustomButtonIcon,
     };
 
-    return ! utils.hasValue(attrs.button_text) || ! utils.hasValue(attrs.button_url) ? '' : (
+    return ! utils.hasValue(props.button_text) || ! utils.hasValue(props.button_url) ? '' : (
       <div className='et_pb_button_wrapper'><a
         className={utils.classnames(buttonClassName)}
-        href={attrs.button_url}
+        href={props.button_url}
         target={buttonTarget}
-        rel={utils.linkRel(attrs.button_rel)}
+        rel={utils.linkRel(props.button_rel)}
         data-icon={buttonIcon}
-      >{attrs.button_text}</a></div>
+      >{props.button_text}</a></div>
     );
   }
 

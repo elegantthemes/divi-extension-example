@@ -14,39 +14,39 @@ class CustomCtaAllOptions extends Component {
    * @return array
    */
   css() {
-    const attrs = this.props;
+    const props = this.props;
     const utils = this.props.utils;
     const additionalCss = [];
 
     // Process text-align value into style
-    if (utils.hasValue(attrs.text_align)) {
+    if (utils.hasValue(props.text_align)) {
       additionalCss.push([{
         selector: '%%order_class%% .typography-fields',
-        declaration: `text-align: ${attrs.text_align};`,
+        declaration: `text-align: ${props.text_align};`,
       }]);
     }
 
     // Process font option into style
-    if (utils.hasValue(attrs.select_font)) {
+    if (utils.hasValue(props.select_font)) {
       additionalCss.push([{
         selector: '%%order_class%% .typography-fields',
-        declaration: utils.setElementFont(attrs.select_font),
+        declaration: utils.setElementFont(props.select_font),
       }]);
     }
 
     // Process color preview color
-    if (utils.hasValue(attrs.color)) {
+    if (utils.hasValue(props.color)) {
       additionalCss.push([{
         selector: '%%order_class%% .colorpicker-preview.color',
-        declaration: `background-color: ${attrs.color};`,
+        declaration: `background-color: ${props.color};`,
       }]);
     }
 
     // Process color preview color alpha
-    if (utils.hasValue(attrs.color_alpha)) {
+    if (utils.hasValue(props.color_alpha)) {
       additionalCss.push([{
         selector: '%%order_class%% .colorpicker-preview.color-alpha',
-        declaration: `background-color: ${attrs.color_alpha};`,
+        declaration: `background-color: ${props.color_alpha};`,
       }]);
     }
 
@@ -59,24 +59,24 @@ class CustomCtaAllOptions extends Component {
    * @return object (JSX)
    */
   renderButton() {
-    const attrs = this.props;
+    const props = this.props;
     const utils = this.props.utils;
-    const buttonTarget = 'on' === attrs.url_new_window ? '_blank' : '';
-    const isCustomButtonIcon = utils.hasValue(attrs.button_icon);
-    const buttonIcon = isCustomButtonIcon ? utils.processFontIcon(attrs.button_icon) : false;
+    const buttonTarget = 'on' === props.url_new_window ? '_blank' : '';
+    const isCustomButtonIcon = utils.hasValue(props.button_icon);
+    const buttonIcon = isCustomButtonIcon ? utils.processFontIcon(props.button_icon) : false;
     const buttonClassName = {
       et_pb_button: true,
       et_pb_custom_button_icon: isCustomButtonIcon,
     };
 
-    return ! utils.hasValue(attrs.button_text) || ! utils.hasValue(attrs.button_url) ? '' : (
+    return ! utils.hasValue(props.button_text) || ! utils.hasValue(props.button_url) ? '' : (
       <div className='et_pb_button_wrapper'><a
         className={utils.classnames(buttonClassName)}
-        href={attrs.button_url}
+        href={props.button_url}
         target={buttonTarget}
-        rel={utils.linkRel(attrs.button_rel)}
+        rel={utils.linkRel(props.button_rel)}
         data-icon={buttonIcon}
-      >{attrs.button_text}</a></div>
+      >{props.button_text}</a></div>
     );
   }
 
@@ -177,7 +177,7 @@ class CustomCtaAllOptions extends Component {
    */
   render() {
     const i10n = window.DiviCustomModulesSettings.i10n.dicm_cta_all_options;
-    const attrs = this.props;
+    const props = this.props;
 
     // Set 3rd party component's css
     this.props.css(this.css());
@@ -190,33 +190,33 @@ class CustomCtaAllOptions extends Component {
         <div className="basic-fields fields-group">
           <h3>{i10n.basic_fields}</h3>
           <h4>{i10n.text}</h4>
-          {attrs.text}
+          {props.text}
           <h4>{i10n.textarea}</h4>
-          {attrs.textarea}
+          {props.textarea}
           <h4>{i10n.select}</h4>
-          {attrs.select}
+          {props.select}
           <h4>{i10n.toggle}</h4>
-          {attrs.toggle}
+          {props.toggle}
           <h4>{i10n.multiple_buttons}</h4>
-          {attrs.multiple_buttons}
+          {props.multiple_buttons}
           <h4>{i10n.multiple_checkboxes}</h4>
-          {attrs.multiple_checkboxes}
+          {props.multiple_checkboxes}
           <h4>{i10n.input_range}</h4>
-          {attrs.input_range}
+          {props.input_range}
           <h4>{i10n.input_datetime}</h4>
-          {attrs.input_datetime}
+          {props.input_datetime}
           <h4>{i10n.input_margin}</h4>
-          {attrs.input_margin}
+          {props.input_margin}
           <h4>{i10n.checkboxes_category}</h4>
-          {attrs.checkboxes_category}
+          {props.checkboxes_category}
           <h4>{i10n.select_sidebar}</h4>
-          {attrs.select_sidebar}
+          {props.select_sidebar}
         </div>
 
         <div className="code-fields fields-group">
           <h3>{i10n.code_fields}</h3>
           <h4>{i10n.codemirror}</h4>
-          {attrs.codemirror}
+          {props.codemirror}
         </div>
 
         <div className="form-fields fields-group">
@@ -225,26 +225,26 @@ class CustomCtaAllOptions extends Component {
           <h4>{i10n.option_list}</h4>
 
             <p>{i10n.prop_value}</p>
-            <pre>{attrs.option_list}</pre>
+            <pre>{props.option_list}</pre>
             <p>{i10n.rendered_prop_value}</p>
             <select name="option-name">
-              {this.renderProp(attrs.options_list, 'options_list', 'options_list', attrs.moduleInfo.type)}
+              {this.renderProp(props.options_list, 'options_list', 'options_list', props.moduleInfo.type)}
             </select>
 
           <h4>{i10n.option_list_checkbox}</h4>
             <p>{i10n.prop_value}</p>
-            <pre>{attrs.options_list_checkbox}</pre>
+            <pre>{props.options_list_checkbox}</pre>
             <p>{i10n.rendered_prop_value}</p>
             <p>
-              {this.renderProp(attrs.options_list_checkbox, 'options_list_checkbox', 'options_list_checkbox', attrs.moduleInfo.type)}
+              {this.renderProp(props.options_list_checkbox, 'options_list_checkbox', 'options_list_checkbox', props.moduleInfo.type)}
             </p>
 
           <h4>{i10n.option_list_radio}</h4>
             <p>{i10n.prop_value}</p>
-            <pre>{attrs.options_list_radio}</pre>
+            <pre>{props.options_list_radio}</pre>
             <p>{i10n.rendered_prop_value}</p>
             <p>
-              {this.renderProp(attrs.options_list_radio, 'options_list_radio', 'options_list_radio', attrs.moduleInfo.type)}
+              {this.renderProp(props.options_list_radio, 'options_list_radio', 'options_list_radio', props.moduleInfo.type)}
             </p>
         </div>
 
@@ -253,26 +253,26 @@ class CustomCtaAllOptions extends Component {
 
           <h4>{i10n.select_font_icon}</h4>
             <p>{i10n.prop_value}</p>
-            <pre>{attrs.select_fonticon}</pre>
+            <pre>{props.select_fonticon}</pre>
             <p>{i10n.rendered_prop_value}</p>
-            <p>{this.renderProp(attrs.select_fonticon, 'select_fonticon', 'select_fonticon', attrs.moduleInfo.type)}</p>
+            <p>{this.renderProp(props.select_fonticon, 'select_fonticon', 'select_fonticon', props.moduleInfo.type)}</p>
 
           <h4>{i10n.select_text_align}</h4>
-            {attrs.text_align}
+            {props.text_align}
 
           <h4>{i10n.select_font}</h4>
-            {attrs.select_font}
+            {props.select_font}
         </div>
 
         <div className="color-fields fields-group">
           <h3>{i10n.color_fields}</h3>
 
           <h4>{i10n.color}</h4>
-            {attrs.color}
+            {props.color}
             <div className="colorpicker-preview color"></div>
 
           <h4>{i10n.color_alpha}</h4>
-            {attrs.color_alpha}
+            {props.color_alpha}
             <div className="colorpicker-preview color-alpha"></div>
         </div>
 
@@ -281,28 +281,28 @@ class CustomCtaAllOptions extends Component {
 
           <h4>{i10n.upload}</h4>
             <p>{i10n.prop_value}</p>
-            <pre>{attrs.upload}</pre>
+            <pre>{props.upload}</pre>
             <p>{i10n.rendered_prop_value}</p>
-            <p>{this.renderProp(attrs.upload, 'upload', 'upload_image', attrs.moduleInfo.type)}</p>
+            <p>{this.renderProp(props.upload, 'upload', 'upload_image', props.moduleInfo.type)}</p>
         </div>
 
         <div className="advanced-fields fields-group">
           <h3>{i10n.advanced_fields}</h3>
 
           <h4>{i10n.tab_1_text}</h4>
-          {attrs.tab_1_text}
+          {props.tab_1_text}
 
           <h4>{i10n.tab_2_text}</h4>
-          {attrs.tab_2_text}
+          {props.tab_2_text}
 
           <h4>{i10n.presets_shadow}</h4>
-          {attrs.presets_shadow}
+          {props.presets_shadow}
 
           <h4>{i10n.preset_affected_1}</h4>
-          {attrs.preset_affected_1}
+          {props.preset_affected_1}
 
           <h4>{i10n.preset_affected_2}</h4>
-          {attrs.preset_affected_2}
+          {props.preset_affected_2}
         </div>
       </div>
     );
