@@ -8,7 +8,7 @@ import './style.css';
 class CustomCtaFull extends Component {
   renderButton() {
     const props = this.props;
-    const utils = window.ET_Builder.API.utils;
+    const utils = window.ET_Builder.Utils;
     const buttonTarget = 'on' === props.url_new_window ? '_blank' : '';
     const isCustomButtonIcon = utils.hasValue(props.button_icon);
     const buttonIcon = isCustomButtonIcon ? utils.processFontIcon(props.button_icon) : false;
