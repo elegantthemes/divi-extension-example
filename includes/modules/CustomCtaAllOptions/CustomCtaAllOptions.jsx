@@ -95,13 +95,9 @@ class CustomCtaAllOptions extends Component {
       return output;
     }
 
-    const optionSearch = ['&#91;', '&#93;'];
-    const optionReplace = ['[', ']'];
-
     switch(fieldType) {
       case 'options_list':
-        value = _.replace(_.replace(value, optionSearch[0], optionReplace[0]), optionSearch[1], optionReplace[1]);
-        value = JSON.parse( value );
+        value = utils.decodeOptionListValue(value);
 
         if (_.isArray(value)) {
           output = value.map((option, index) => {
@@ -114,8 +110,7 @@ class CustomCtaAllOptions extends Component {
       case 'options_list_checkbox':
         const checkboxName = `${orderClass}_${fieldName}`;
 
-        value = _.replace(_.replace(value, optionSearch[0], optionReplace[0]), optionSearch[1], optionReplace[1]);
-        value = JSON.parse( value );
+        value = utils.decodeOptionListValue(value);
 
         if (_.isArray(value)) {
           output = value.map((option, index) => {
@@ -132,10 +127,9 @@ class CustomCtaAllOptions extends Component {
         }
         break;
       case 'options_list_radio':
-        value = _.replace(_.replace(value, optionSearch[0], optionReplace[0]), optionSearch[1], optionReplace[1]);
-        value = JSON.parse( value );
-
         const radioName  = `${orderClass}_${fieldName}`;
+
+        value = utils.decodeOptionListValue(value);
 
         if (_.isArray(value)) {
           output = value.map((option, index) => {
