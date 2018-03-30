@@ -15,7 +15,7 @@ class CustomCtaAllOptions extends Component {
    */
   css() {
     const props = this.props;
-    const utils = window.ET_Builder.Utils;
+    const utils = window.ET_Builder.API.Utils;
     const additionalCss = [];
 
     // Process text-align value into style
@@ -60,7 +60,7 @@ class CustomCtaAllOptions extends Component {
    */
   renderButton() {
     const props = this.props;
-    const utils = window.ET_Builder.Utils;
+    const utils = window.ET_Builder.API.Utils;
     const buttonTarget = 'on' === props.url_new_window ? '_blank' : '';
     const isCustomButtonIcon = utils.hasValue(props.button_icon);
     const buttonIcon = isCustomButtonIcon ? utils.processFontIcon(props.button_icon) : false;
@@ -86,7 +86,7 @@ class CustomCtaAllOptions extends Component {
    * @return mixed
    */
   renderProp(value, fieldName, fieldType, renderSlug) {
-    const utils = window.ET_Builder.Utils;
+    const utils = window.ET_Builder.API.Utils;
     const _ = utils._;
     const orderClass = `${this.props.moduleInfo.type}_${this.props.moduleInfo.order}`;
     let output = '';

@@ -7,7 +7,7 @@ import './style.css';
 class CustomCtaChild extends Component {
   renderButton() {
     const props = this.props;
-    const utils = window.ET_Builder.Utils;
+    const utils = window.ET_Builder.API.Utils;
     const buttonTarget = 'on' === props.url_new_window ? '_blank' : '';
     const isCustomButtonIcon = utils.hasValue(props.button_icon);
     const buttonIcon = isCustomButtonIcon ? utils.processFontIcon(props.button_icon) : false;
