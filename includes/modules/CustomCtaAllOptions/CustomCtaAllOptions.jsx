@@ -15,7 +15,7 @@ class CustomCtaAllOptions extends Component {
    */
   css() {
     const props = this.props;
-    const utils = this.props.utils;
+    const utils = window.ET_Builder.API.utils;
     const additionalCss = [];
 
     // Process text-align value into style
@@ -60,7 +60,7 @@ class CustomCtaAllOptions extends Component {
    */
   renderButton() {
     const props = this.props;
-    const utils = this.props.utils;
+    const utils = window.ET_Builder.API.utils;
     const buttonTarget = 'on' === props.url_new_window ? '_blank' : '';
     const isCustomButtonIcon = utils.hasValue(props.button_icon);
     const buttonIcon = isCustomButtonIcon ? utils.processFontIcon(props.button_icon) : false;
@@ -86,7 +86,7 @@ class CustomCtaAllOptions extends Component {
    * @return mixed
    */
   renderProp(value, fieldName, fieldType, renderSlug) {
-    const utils = this.props.utils;
+    const utils = window.ET_Builder.API.utils;
     const _ = utils._;
     const orderClass = `${this.props.moduleInfo.type}_${this.props.moduleInfo.order}`;
     let output = '';
@@ -156,7 +156,7 @@ class CustomCtaAllOptions extends Component {
           <span style={{
             fontFamily: '"ETmodules"',
             fontSize: 40
-          }}>{this.props.utils.processFontIcon(value)}</span>
+          }}>{utils.processFontIcon(value)}</span>
         );
         break;
       case 'upload_image':
