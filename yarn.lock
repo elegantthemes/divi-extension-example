@@ -1109,9 +1109,9 @@ babel-plugin-transform-react-remove-prop-types@0.4.12:
   version "0.4.12"
   resolved "https://registry.yarnpkg.com/babel-plugin-transform-react-remove-prop-types/-/babel-plugin-transform-react-remove-prop-types-0.4.12.tgz#a382c27c42d6580748c80caf8c3d5091edbb60b8"
 
-babel-preset-divi-extension@^1.0.0-beta.10:
-  version "1.0.0-beta.10"
-  resolved "https://registry.yarnpkg.com/babel-preset-divi-extension/-/babel-preset-divi-extension-1.0.0-beta.10.tgz#3c2c66d24aec6ae595eabab6d1012c4ec4f4a614"
+babel-preset-divi-extension@^1.0.0-beta.12:
+  version "1.0.0-beta.12"
+  resolved "https://registry.yarnpkg.com/babel-preset-divi-extension/-/babel-preset-divi-extension-1.0.0-beta.12.tgz#db19cfacccf45e3e5520c6dfb007838783677a3d"
   dependencies:
     "@babel/core" "7.0.0-beta.42"
     "@babel/plugin-proposal-class-properties" "7.0.0-beta.42"
@@ -2345,9 +2345,9 @@ dir-glob@^2.0.0:
     arrify "^1.0.1"
     path-type "^3.0.0"
 
-divi-dev-utils@^1.0.0-beta.10:
-  version "1.0.0-beta.10"
-  resolved "https://registry.yarnpkg.com/divi-dev-utils/-/divi-dev-utils-1.0.0-beta.10.tgz#9d6383c648f5a034a5388ff7a266a3e6fc522fa9"
+divi-dev-utils@^1.0.0-beta.12:
+  version "1.0.0-beta.12"
+  resolved "https://registry.yarnpkg.com/divi-dev-utils/-/divi-dev-utils-1.0.0-beta.12.tgz#6ef675d73a9a6e17f03829e4f964eb473cd3e0ad"
   dependencies:
     "@babel/code-frame" "7.0.0-beta.42"
     address "1.0.3"
@@ -2355,7 +2355,7 @@ divi-dev-utils@^1.0.0-beta.10:
     chalk "2.3.0"
     cross-spawn "5.1.0"
     detect-port-alt "1.1.5"
-    divi-error-overlay "^1.0.0-beta.10"
+    divi-error-overlay "^1.0.0-beta.12"
     escape-string-regexp "1.0.5"
     filesize "3.5.11"
     find-config "1.0"
@@ -2373,13 +2373,13 @@ divi-dev-utils@^1.0.0-beta.10:
     strip-ansi "4.0.0"
     text-table "0.2.0"
 
-divi-error-overlay@^1.0.0-beta.10:
-  version "1.0.0-beta.10"
-  resolved "https://registry.yarnpkg.com/divi-error-overlay/-/divi-error-overlay-1.0.0-beta.10.tgz#4685b0d031c2381a373f358a535dca2ea088fe59"
+divi-error-overlay@^1.0.0-beta.12:
+  version "1.0.0-beta.12"
+  resolved "https://registry.yarnpkg.com/divi-error-overlay/-/divi-error-overlay-1.0.0-beta.12.tgz#780fe962bc16094f65b1c79004248d210b383d44"
 
-divi-scripts@1.0.0-beta.10:
-  version "1.0.0-beta.10"
-  resolved "https://registry.yarnpkg.com/divi-scripts/-/divi-scripts-1.0.0-beta.10.tgz#b9222faf48a58baaaff374bca39725e2306cefce"
+divi-scripts@1.0.0-beta.12:
+  version "1.0.0-beta.12"
+  resolved "https://registry.yarnpkg.com/divi-scripts/-/divi-scripts-1.0.0-beta.12.tgz#be7ad005b5b331e55aa27f55b2b8db4213731491"
   dependencies:
     "@babel/core" "7.0.0-beta.42"
     "@babel/runtime" "7.0.0-beta.42"
@@ -2389,15 +2389,15 @@ divi-scripts@1.0.0-beta.10:
     babel-jest "22.1.0"
     babel-loader "8.0.0-beta.0"
     babel-plugin-named-asset-import "^1.0.0-alpha.0"
-    babel-preset-divi-extension "^1.0.0-beta.10"
+    babel-preset-divi-extension "^1.0.0-beta.12"
     case-sensitive-paths-webpack-plugin "2.1.1"
     chalk "2.3.0"
     css-loader "0.28.9"
-    divi-dev-utils "^1.0.0-beta.10"
+    divi-dev-utils "^1.0.0-beta.12"
     dotenv "5.0.0"
     dotenv-expand "4.2.0"
     eslint "4.15.0"
-    eslint-config-divi-extension "^1.0.0-beta.10"
+    eslint-config-divi-extension "^1.0.0-beta.12"
     eslint-loader "1.9.0"
     eslint-plugin-flowtype "2.41.0"
     eslint-plugin-import "2.8.0"
@@ -2726,9 +2726,9 @@ escope@^3.6.0:
     esrecurse "^4.1.0"
     estraverse "^4.1.1"
 
-eslint-config-divi-extension@^1.0.0-beta.10:
-  version "1.0.0-beta.10"
-  resolved "https://registry.yarnpkg.com/eslint-config-divi-extension/-/eslint-config-divi-extension-1.0.0-beta.10.tgz#6b6dbaf48a2b9428d236d270e9e7a180002ce132"
+eslint-config-divi-extension@^1.0.0-beta.12:
+  version "1.0.0-beta.12"
+  resolved "https://registry.yarnpkg.com/eslint-config-divi-extension/-/eslint-config-divi-extension-1.0.0-beta.12.tgz#5162dbf55588257b9fbd75c3febf1a57736c2b74"
   dependencies:
     confusing-browser-globals "^2.0.0-next"
 

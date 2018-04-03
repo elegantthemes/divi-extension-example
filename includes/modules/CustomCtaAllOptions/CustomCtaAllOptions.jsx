@@ -1,101 +1,108 @@
 // External Dependencies
 import React, { Component } from 'react';
 
-// Internal Dependencies
-import './style.css';
-
 
 class CustomCtaAllOptions extends Component {
+
+  static slug = 'dicm_cta_all_options';
+
   /**
-   * Declare all component on-page styling on this method
+   * All component inline styling.
    *
    * @since 1.0.0
    *
    * @return array
    */
   css() {
-    const props = this.props;
-    const utils = window.ET_Builder.API.Utils;
+    const utils         = window.ET_Builder.API.Utils;
     const additionalCss = [];
 
     // Process text-align value into style
-    if (utils.hasValue(props.text_align)) {
+    if (this.props.text_align) {
       additionalCss.push([{
-        selector: '%%order_class%% .typography-fields',
-        declaration: `text-align: ${props.text_align};`,
+        selector:    '%%order_class%% .typography-fields',
+        declaration: `text-align: ${this.props.text_align};`,
       }]);
     }
 
     // Process font option into style
-    if (utils.hasValue(props.select_font)) {
+    if (this.props.select_font) {
       additionalCss.push([{
-        selector: '%%order_class%% .typography-fields',
-        declaration: utils.setElementFont(props.select_font),
+        selector:    '%%order_class%% .typography-fields',
+        declaration: utils.setElementFont(this.props.select_font),
       }]);
     }
 
     // Process color preview color
-    if (utils.hasValue(props.color)) {
+    if (this.props.color) {
       additionalCss.push([{
-        selector: '%%order_class%% .colorpicker-preview.color',
-        declaration: `background-color: ${props.color};`,
+        selector:    '%%order_class%% .colorpicker-preview.color',
+        declaration: `background-color: ${this.props.color};`,
       }]);
     }
 
     // Process color preview color alpha
-    if (utils.hasValue(props.color_alpha)) {
+    if (this.props.color_alpha) {
       additionalCss.push([{
-        selector: '%%order_class%% .colorpicker-preview.color-alpha',
-        declaration: `background-color: ${props.color_alpha};`,
+        selector:    '%%order_class%% .colorpicker-preview.color-alpha',
+        declaration: `background-color: ${this.props.color_alpha};`,
       }]);
     }
 
-    return additionalCss;
+    this.props.css(additionalCss);
   }
 
   /**
    * Custom method to render button UI
    *
-   * @return object (JSX)
+   * @return {string|React.Component}
    */
-  renderButton() {
-    const props = this.props;
-    const utils = window.ET_Builder.API.Utils;
-    const buttonTarget = 'on' === props.url_new_window ? '_blank' : '';
-    const isCustomButtonIcon = utils.hasValue(props.button_icon);
-    const buttonIcon = isCustomButtonIcon ? utils.processFontIcon(props.button_icon) : false;
-    const buttonClassName = {
-      et_pb_button: true,
-      et_pb_custom_button_icon: isCustomButtonIcon,
+  _renderButton() {
+    const props              = this.props;
+    const utils              = window.ET_Builder.API.Utils;
+    const buttonTarget       = 'on' === props.url_new_window ? '_blank' : '';
+    const buttonIcon         = props.button_icon ? utils.processFontIcon(props.button_icon) : false;
+    const buttonClassName    = {
+      et_pb_button:             true,
+      et_pb_custom_button_icon: props.button_icon,
     };
 
-    return ! utils.hasValue(props.button_text) || ! utils.hasValue(props.button_url) ? '' : (
-      <div className='et_pb_button_wrapper'><a
-        className={utils.classnames(buttonClassName)}
-        href={props.button_url}
-        target={buttonTarget}
-        rel={utils.linkRel(props.button_rel)}
-        data-icon={buttonIcon}
-      >{props.button_text}</a></div>
+    if (! props.button_text || ! props.button_url) {
+      return '';
+    }
+
+    return (
+      <div className='et_pb_button_wrapper'>
+        <a
+          className={utils.classnames(buttonClassName)}
+          href={props.button_url}
+          target={buttonTarget}
+          rel={utils.linkRel(props.button_rel)}
+          data-icon={buttonIcon}
+        >
+          {props.button_text}
+        </a>
+      </div>
     );
   }
 
   /**
    * Render prop value. Some attribute values need to be parsed before can be displayed
    *
-   * @return mixed
+   * @return {string|React.Component|React.component[]}
    */
-  renderProp(value, fieldName, fieldType, renderSlug) {
-    const utils = window.ET_Builder.API.Utils;
-    const _ = utils._;
+  _renderProp(value, fieldName, fieldType, renderSlug) {
+    const utils      = window.ET_Builder.API.Utils;
+    const _          = utils._;
     const orderClass = `${this.props.moduleInfo.type}_${this.props.moduleInfo.order}`;
+
     let output = '';
 
-    if (!utils.hasValue(value)) {
+    if (! value) {
       return output;
     }
 
-    switch(fieldType) {
+    switch (fieldType) {
       case 'options_list':
         value = utils.decodeOptionListValue(value);
 
@@ -115,11 +122,11 @@ class CustomCtaAllOptions extends Component {
         if (_.isArray(value)) {
           output = value.map((option, index) => {
             const checkboxID = `${checkboxName}_${index}`;
-            const isChecked = 1 === option.checked;
+            const isChecked  = 1 === option.checked;
 
-            return(
+            return (
               <span className="checkbox-wrap" key={`${orderClass}-${index}`}>
-                <input type="checkbox" id={checkboxID} className="input" value={option.value} checked={isChecked} />
+                <input type="checkbox" id={checkboxID} className="input" value={option.value} checked={isChecked}/>
                 <label htmlFor={checkboxID}><i></i>{option.value}</label>
               </span>
             );
@@ -127,18 +134,18 @@ class CustomCtaAllOptions extends Component {
         }
         break;
       case 'options_list_radio':
-        const radioName  = `${orderClass}_${fieldName}`;
+        const radioName = `${orderClass}_${fieldName}`;
 
         value = utils.decodeOptionListValue(value);
 
         if (_.isArray(value)) {
           output = value.map((option, index) => {
-            const radioId = `${radioName}_radio_${index}`;
+            const radioId   = `${radioName}_radio_${index}`;
             const isChecked = 1 === option.checked;
 
-            return(
+            return (
               <span key={`${orderClass}-${index}`} className="radio-wrap">
-                <input type="radio" id={radioId} className="input" value={option.value} name={radioName} checked={isChecked} />
+                <input type="radio" id={radioId} className="input" value={option.value} name={radioName} checked={isChecked}/>
                 <label htmlFor={radioId}><i></i>{option.value}</label>
               </span>
             );
@@ -147,14 +154,11 @@ class CustomCtaAllOptions extends Component {
         break;
       case 'select_fonticon':
         output = (
-          <span style={{
-            fontFamily: '"ETmodules"',
-            fontSize: 40
-          }}>{utils.processFontIcon(value)}</span>
+          <span style={{fontFamily: '"ETmodules"', fontSize: 40}}>{utils.processFontIcon(value)}</span>
         );
         break;
       case 'upload_image':
-        output = <img src={value} alt='' />;
+        output = <img src={value} alt=''/>;
         break;
       default:
         output = value;
@@ -167,20 +171,20 @@ class CustomCtaAllOptions extends Component {
   /**
    * Render component output
    *
-   * @return object (JSX)
+   * @return {string|React.Component|React.component[]}
    */
   render() {
-    const i10n = window.DiviCustomModulesBuilderData.i10n.dicm_cta_all_options;
+    const i10n  = window.DiviCustomModulesBuilderData.i10n.dicm_cta_all_options;
     const props = this.props;
 
     // Set 3rd party component's css
-    this.props.css(this.css());
+    this.css();
 
     return (
       <div>
         <h2 className="dicm-title">{this.props.title}</h2>
         <div className="dicm-content">{this.props.content()}</div>
-        {this.renderButton()}
+        {this._renderButton()}
         <div className="basic-fields fields-group">
           <h3>{i10n.basic_fields}</h3>
           <h4>{i10n.text}</h4>
@@ -218,66 +222,66 @@ class CustomCtaAllOptions extends Component {
 
           <h4>{i10n.option_list}</h4>
 
-            <p>{i10n.prop_value}</p>
-            <pre>{props.option_list}</pre>
-            <p>{i10n.rendered_prop_value}</p>
-            <select name="option-name">
-              {this.renderProp(props.options_list, 'options_list', 'options_list', props.moduleInfo.type)}
-            </select>
+          <p>{i10n.prop_value}</p>
+          <pre>{props.option_list}</pre>
+          <p>{i10n.rendered_prop_value}</p>
+          <select name="option-name">
+            {this._renderProp(props.options_list, 'options_list', 'options_list', props.moduleInfo.type)}
+          </select>
 
           <h4>{i10n.option_list_checkbox}</h4>
-            <p>{i10n.prop_value}</p>
-            <pre>{props.options_list_checkbox}</pre>
-            <p>{i10n.rendered_prop_value}</p>
-            <p>
-              {this.renderProp(props.options_list_checkbox, 'options_list_checkbox', 'options_list_checkbox', props.moduleInfo.type)}
-            </p>
+          <p>{i10n.prop_value}</p>
+          <pre>{props.options_list_checkbox}</pre>
+          <p>{i10n.rendered_prop_value}</p>
+          <p>
+            {this._renderProp(props.options_list_checkbox, 'options_list_checkbox', 'options_list_checkbox', props.moduleInfo.type)}
+          </p>
 
           <h4>{i10n.option_list_radio}</h4>
-            <p>{i10n.prop_value}</p>
-            <pre>{props.options_list_radio}</pre>
-            <p>{i10n.rendered_prop_value}</p>
-            <p>
-              {this.renderProp(props.options_list_radio, 'options_list_radio', 'options_list_radio', props.moduleInfo.type)}
-            </p>
+          <p>{i10n.prop_value}</p>
+          <pre>{props.options_list_radio}</pre>
+          <p>{i10n.rendered_prop_value}</p>
+          <p>
+            {this._renderProp(props.options_list_radio, 'options_list_radio', 'options_list_radio', props.moduleInfo.type)}
+          </p>
         </div>
 
         <div className="typography-fields fields-group">
           <h3>{i10n.typography_fields}</h3>
 
           <h4>{i10n.select_font_icon}</h4>
-            <p>{i10n.prop_value}</p>
-            <pre>{props.select_fonticon}</pre>
-            <p>{i10n.rendered_prop_value}</p>
-            <p>{this.renderProp(props.select_fonticon, 'select_fonticon', 'select_fonticon', props.moduleInfo.type)}</p>
+          <p>{i10n.prop_value}</p>
+          <pre>{props.select_fonticon}</pre>
+          <p>{i10n.rendered_prop_value}</p>
+          <p>{this._renderProp(props.select_fonticon, 'select_fonticon', 'select_fonticon', props.moduleInfo.type)}</p>
 
           <h4>{i10n.select_text_align}</h4>
-            {props.text_align}
+          {props.text_align}
 
           <h4>{i10n.select_font}</h4>
-            {props.select_font}
+          {props.select_font}
         </div>
 
         <div className="color-fields fields-group">
           <h3>{i10n.color_fields}</h3>
 
           <h4>{i10n.color}</h4>
-            {props.color}
-            <div className="colorpicker-preview color"></div>
+          {props.color}
+          <div className="colorpicker-preview color"></div>
 
           <h4>{i10n.color_alpha}</h4>
-            {props.color_alpha}
-            <div className="colorpicker-preview color-alpha"></div>
+          {props.color_alpha}
+          <div className="colorpicker-preview color-alpha"></div>
         </div>
 
         <div className="upload-fields fields-group">
           <h3>{i10n.upload_fields}</h3>
 
           <h4>{i10n.upload}</h4>
-            <p>{i10n.prop_value}</p>
-            <pre>{props.upload}</pre>
-            <p>{i10n.rendered_prop_value}</p>
-            <p>{this.renderProp(props.upload, 'upload', 'upload_image', props.moduleInfo.type)}</p>
+          <p>{i10n.prop_value}</p>
+          <pre>{props.upload}</pre>
+          <p>{i10n.rendered_prop_value}</p>
+          <p>{this._renderProp(props.upload, 'upload', 'upload_image', props.moduleInfo.type)}</p>
         </div>
 
         <div className="advanced-fields fields-group">

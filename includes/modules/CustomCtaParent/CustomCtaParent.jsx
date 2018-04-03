@@ -1,10 +1,11 @@
 // External Dependencies
 import React, { Component } from 'react';
 
-// Internal Dependencies
-import './style.css';
 
 class CustomCtaParent extends Component {
+
+  static slug = 'dicm_cta_parent';
+
   /**
    * Module render in VB
    * Basically DICM_CTA_Parent->render() equivalent in JSX
