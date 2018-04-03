@@ -13,43 +13,41 @@ class CustomCtaAllOptions extends Component {
    *
    * @return array
    */
-  css() {
+  static css(props) {
     const utils         = window.ET_Builder.API.Utils;
     const additionalCss = [];
 
     // Process text-align value into style
-    if (this.props.text_align) {
+    if (props.text_align) {
       additionalCss.push([{
         selector:    '%%order_class%% .typography-fields',
-        declaration: `text-align: ${this.props.text_align};`,
+        declaration: `text-align: ${props.text_align};`,
       }]);
     }
 
     // Process font option into style
-    if (this.props.select_font) {
+    if (props.select_font) {
       additionalCss.push([{
         selector:    '%%order_class%% .typography-fields',
-        declaration: utils.setElementFont(this.props.select_font),
+        declaration: utils.setElementFont(props.select_font),
       }]);
     }
 
     // Process color preview color
-    if (this.props.color) {
+    if (props.color) {
       additionalCss.push([{
         selector:    '%%order_class%% .colorpicker-preview.color',
-        declaration: `background-color: ${this.props.color};`,
+        declaration: `background-color: ${props.color};`,
       }]);
     }
 
     // Process color preview color alpha
-    if (this.props.color_alpha) {
+    if (props.color_alpha) {
       additionalCss.push([{
         selector:    '%%order_class%% .colorpicker-preview.color-alpha',
-        declaration: `background-color: ${this.props.color_alpha};`,
+        declaration: `background-color: ${props.color_alpha};`,
       }]);
     }
-
-    this.props.css(additionalCss);
   }
 
   /**
