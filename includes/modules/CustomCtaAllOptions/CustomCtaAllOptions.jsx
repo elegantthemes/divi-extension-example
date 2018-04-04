@@ -48,6 +48,8 @@ class CustomCtaAllOptions extends Component {
         declaration: `background-color: ${props.color_alpha};`,
       }]);
     }
+
+    return additionalCss;
   }
 
   /**
@@ -174,9 +176,6 @@ class CustomCtaAllOptions extends Component {
   render() {
     const i10n  = window.DiviCustomModulesBuilderData.i10n.dicm_cta_all_options;
     const props = this.props;
-
-    // Set 3rd party component's css
-    this.css();
 
     return (
       <div>
