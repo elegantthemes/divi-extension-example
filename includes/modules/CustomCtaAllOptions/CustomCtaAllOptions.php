@@ -417,8 +417,8 @@ class DICM_CTA_All_Options extends ET_Builder_Module {
 							'content' => 'aA',
 						),
 						'fields'  => array(
-							'preset_effected_1' => '0.1em',
-							'preset_effected_2' => '1em',
+							'preset_affected_1' => '0.1em',
+							'preset_affected_2' => '1em',
 						),
 						'value'   => 'preset1'
 					),
@@ -428,8 +428,8 @@ class DICM_CTA_All_Options extends ET_Builder_Module {
 							'content' => 'aA',
 						),
 						'fields'  => array(
-							'preset_effected_1' => '0.5em',
-							'preset_effected_2' => '5em',
+							'preset_affected_1' => '0.5em',
+							'preset_affected_2' => '5em',
 						),
 						'value'   => 'preset2'
 					),
