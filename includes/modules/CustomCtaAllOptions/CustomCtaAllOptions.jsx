@@ -126,7 +126,7 @@ class CustomCtaAllOptions extends Component {
 
             return (
               <span className="checkbox-wrap" key={`${orderClass}-${index}`}>
-                <input type="checkbox" id={checkboxID} className="input" value={option.value} checked={isChecked}/>
+                <input type="checkbox" id={checkboxID} className="input" value={option.value} readOnly={true} checked={isChecked}/>
                 <label htmlFor={checkboxID}><i></i>{option.value}</label>
               </span>
             );
@@ -145,7 +145,7 @@ class CustomCtaAllOptions extends Component {
 
             return (
               <span key={`${orderClass}-${index}`} className="radio-wrap">
-                <input type="radio" id={radioId} className="input" value={option.value} name={radioName} checked={isChecked}/>
+                <input type="radio" id={radioId} className="input" value={option.value} name={radioName} readOnly={true} checked={isChecked}/>
                 <label htmlFor={radioId}><i></i>{option.value}</label>
               </span>
             );
