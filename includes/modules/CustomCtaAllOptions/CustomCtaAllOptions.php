@@ -19,6 +19,13 @@ class DICM_CTA_All_Options extends ET_Builder_Module {
 	//            divi will generate blank placeholder for your module instead
 	public $vb_support = 'on';
 
+	// Module Credits (Appears at the bottom of the module settings modal)
+	protected $module_credits = array(
+		'module_uri' => 'https://divi-dev.site/my-extension',
+		'author'     => 'Divi Developer',
+		'author_uri' => 'https://divi-dev.site',
+	);
+
 	/**
 	 * Module properties initialization
 	 *
