@@ -163,7 +163,7 @@ class DICM_CTA_Child extends ET_Builder_Module {
 		) );
 
 		// Render module content
-		$output = sprintf(
+		return sprintf(
 			'<h2 class="dicm-title">%1$s</h2>
 			<h3 class="dicm-subtitle">%2$s</h3>
 			<div class="dicm-content">%3$s</div>
@@ -173,11 +173,6 @@ class DICM_CTA_Child extends ET_Builder_Module {
 			et_sanitized_previously( $this->content ),
 			et_sanitized_previously( $button )
 		);
-
-		// Render wrapper
-		// 3rd party module with no full VB support has to wrap its render output with $this->_render_module_wrapper().
-		// This method will automatically add module attributes and proper structure for parallax image/video background
-		return $this->_render_module_wrapper( $output, $render_slug );
 	}
 }
 
