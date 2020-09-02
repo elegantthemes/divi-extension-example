@@ -103,6 +103,17 @@ class DICM_CTA_Has_VB_Support extends ET_Builder_Module {
 			'button' => array(
 				'button' => array(
 					'label' => esc_html__( 'Button', 'et_builder' ),
+					'box_shadow'     => array(
+						'css' => array(
+							'main' => '%%order_class%% .et_pb_button',
+						),
+					),
+					'margin_padding' => array(
+						'css' => array(
+							'main'      => "%%order_class%% .et_pb_button",
+							'important' => 'all',
+						),
+					),
 				),
 			),
 		);
@@ -129,7 +140,7 @@ class DICM_CTA_Has_VB_Support extends ET_Builder_Module {
 		// These design related props are added via $this->advanced_options['button']['button']
 		$button_custom         = $this->props['custom_button'];
 		$button_rel            = $this->props['button_rel'];
-		$button_use_icon       = $this->props['button_use_icon'];
+		$button_icon           = $this->props['button_icon'];
 
 		// Render button
 		$button = $this->render_button( array(
@@ -138,7 +149,7 @@ class DICM_CTA_Has_VB_Support extends ET_Builder_Module {
 			'url_new_window'   => $button_url_new_window,
 			'button_custom'    => $button_custom,
 			'button_rel'       => $button_rel,
-			'custom_icon'      => $button_use_icon,
+			'custom_icon'      => $button_icon,
 		) );
 
 		// 3rd party module with full VB support doesn't need to manually wrap its module. Divi builder
