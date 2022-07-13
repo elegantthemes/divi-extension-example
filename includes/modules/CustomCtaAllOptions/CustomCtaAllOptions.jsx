@@ -11,9 +11,12 @@ class CustomCtaAllOptions extends Component {
    *
    * @since 1.0.0
    *
+   * @param {Object} props      Module attribute names and values.
+   * @param {Object} moduleInfo Module info.
+   *
    * @return array
    */
-  static css(props) {
+  static css(props, moduleInfo) {
     const utils         = window.ET_Builder.API.Utils;
     const additionalCss = [];
 
