@@ -212,6 +212,120 @@ class DICM_CTA_All_Options extends ET_Builder_Module {
 		);
 
 
+        $presets = array();
+
+        $prefix     = 'box_shadow_';
+        $style      = $prefix . 'style';
+        $horizontal = $prefix . 'horizontal';
+        $vertical   = $prefix . 'vertical';
+        $blur       = $prefix . 'blur' ;
+        $spread     = $prefix . 'spread' ;
+        $position   = $prefix . 'position' ;
+        $color      = $prefix . 'color';
+
+        $default_presets =  array(
+//            'none'    => array(
+//                'horizontal' => '',
+//                'vertical'   => '',
+//                'blur'       => '',
+//                'spread'     => '',
+//                'position'   => 'outer',
+//            ),
+            'preset1' => array(
+                'horizontal' => '0px',
+                'vertical'   => '2px',
+                'blur'       => '18px',
+                'spread'     => '0px',
+                'position'   => 'outer',
+            ),
+            'preset2' => array(
+                'horizontal' => '6px',
+                'vertical'   => '6px',
+                'blur'       => '18px',
+                'spread'     => '0px',
+                'position'   => 'outer',
+            ),
+            'preset3' => array(
+                'horizontal' => '0px',
+                'vertical'   => '12px',
+                'blur'       => '18px',
+                'spread'     => '-6px',
+                'position'   => 'outer',
+            ),
+            'preset4' => array(
+                'horizontal' => '10px',
+                'vertical'   => '10px',
+                'blur'       => '0px',
+                'spread'     => '0px',
+                'position'   => 'outer',
+            ),
+            'preset5' => array(
+                'horizontal' => '0px',
+                'vertical'   => '6px',
+                'blur'       => '0px',
+                'spread'     => '10px',
+                'position'   => 'outer',
+            ),
+            'preset6' => array(
+                'horizontal' => '0px',
+                'vertical'   => '0px',
+                'blur'       => '18px',
+                'spread'     => '0px',
+                'position'   => 'inner',
+            ),
+            'preset7' => array(
+                'horizontal' => '10px',
+                'vertical'   => '10px',
+                'blur'       => '0px',
+                'spread'     => '0px',
+                'position'   => 'inner',
+            ),
+            'preset8' => array(
+                'horizontal' => '10px',
+                'vertical'   => '10px',
+                'blur'       => '0px',
+                'spread'     => '0px',
+                'position'   => 'inner',
+            ),
+            'preset9' => array(
+                'horizontal' => '10px',
+                'vertical'   => '10px',
+                'blur'       => '0px',
+                'spread'     => '0px',
+                'position'   => 'inner',
+            ),
+        );
+
+        $fetch_preset = function ($preset, $suffix){
+            return array(
+                "box_shadow_horizontal{$suffix}" => $preset['horizontal'],
+                "box_shadow_vertical{$suffix}"   => $preset['vertical'],
+                "box_shadow_blur{$suffix}"       => $preset['blur'],
+                "box_shadow_spread{$suffix}"     => $preset['spread'],
+                "box_shadow_position{$suffix}"   => $preset['position'],
+            );
+        };
+
+        foreach ( $default_presets as $id => $preset ) {
+            if ( 'none' === $id ) {
+                $presets[] = array(
+                    'value'  => $id,
+                    'icon'   => $id,
+                    'fields' => $fetch_preset( $preset, 'difl' ),
+                );
+            } else {
+                $presets[] = array(
+                    'value'   => $id,
+                    'content' => sprintf( '<span class="preset %1$s"></span>', esc_attr( $id ) ),
+                    'fields'  => $fetch_preset( $preset, 'difl' ),
+                );
+            }
+        }
+
+
+
+
+
 		// All possible official field types that can be used on custom module
 		$all_types_tab_slug    = 'demo';
 		$all_types_of_fields   = array(
@@ -474,6 +588,18 @@ class DICM_CTA_All_Options extends ET_Builder_Module {
 					),
 				),
 			),
+
+
+            'presets_box_shadow' => array(
+                'label'           => esc_html__( 'Box Shadow', 'et_builder' ),
+                'type'                => 'select_box_shadow',
+                'className'           => 'box_shadow',
+                'tab_slug'        => $all_types_tab_slug,
+                'toggle_slug'     => 'advanced',
+                'presets'         => $presets,
+                'affects'             => array( $horizontal, $vertical, $blur, $spread, $color, $position ),
+                'default'         => 'none',
+            ),
 		);
 
 		return array_merge( $basic_fields, $all_types_of_fields );
